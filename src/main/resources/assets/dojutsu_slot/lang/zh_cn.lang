@@ -1,0 +1,44 @@
+dojutsu_slot.key.opendojutsuslotinventory=打开瞳术槽位栏
+dojutsu_slot.gui.buttondojutsu=瞳术槽位
+dojutsu_slot.gui.buttonnormal=普通槽位
+dojutsu_slot.command.cleardojutsuinslot=/cleardojutsuinslot [玩家名]
+dojutsu_slot.command.cleardojutsuinslot.success=清除了 %s 的瞳术槽位栏
+
+gui.dojutsu_slot.mode.title=选择“瞳术槽位”模组的运行模式
+gui.dojutsu_slot.mode.classic=经典模式
+gui.dojutsu_slot.mode.dojutsu=瞳术模式
+
+dojutsu.state.left=左眼
+dojutsu.state.right=右眼
+dojutsu.state.format=瞳术状态：%s
+
+key.categories.dojutsu_slot=瞳术槽位
+dojutsu_slot.key.custom_susanoo=开启已解锁的须佐能乎
+
+commands.changedojutsuslotmode.invalid_mode=无效模式: %s。请使用 classic 或 dojutsu。
+commands.changedojutsuslotmode.no_data=无法获取世界数据。
+commands.changedojutsuslotmode.success=世界模式已更改为: %s
+
+command.setsusanoocolor.usage=§c用法: /setsusanoocolor <玩家名> <颜色> (预设名 / 6位十六进制(如FFAA00) / random)
+command.setsusanoocolor.player_not_found=§c找不到玩家: %s
+command.setsusanoocolor.invalid_color=§c无效颜色: %s。请使用预设名、6位十六进制或'random'。
+command.setsusanoocolor.success=§a已设置 %s 的须佐颜色为 #%s
+
+dojutsu.command.clearsusanoo.usage=用法: %s
+dojutsu.command.clearsusanoo.cleared_color=已清除 %s 的须佐颜色标签
+dojutsu.command.clearsusanoo.cleared_awakened=已清除 %s 的须佐觉醒标签
+dojutsu.command.clearsusanoo.cleared_all=已清除 %s 的所有须佐标签
+dojutsu.command.clearsusanoo.unknown=未知操作: %s。可用: color, awakened, all
+dojutsu.command.clearsusanoo.warning_active=注意: %s 当前有激活的须佐，已强制收回
+
+dojutsu.mode.classic=经典模式
+dojutsu.mode.dojutsu=瞳术模式
+dojutsu.mode.set=世界模式已设置为: %s
+dojutsu.mode.already_set=模式已经设置过，无法更改！
+
+dojutsu.slot.vanilla_helmet=原版头盔槽
+dojutsu.slot.left_dojutsu=左瞳术槽
+dojutsu.slot.right_dojutsu=右瞳术槽
+
+dojutsu.state.active=激活
+dojutsu.state.inactive=未激活

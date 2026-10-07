@@ -1,0 +1,15 @@
+[
+{
+  "modid": "dojutsu_slot",
+  "name": "Dojutsu Slot",
+  "description": "A Dojutsu Slot mod for AHZNB's Naruto Mod (By RLYD_Fuskirby)",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["RLYD_Fuskirby"],
+  "credits": "Thanks to AHZNB for Naruto Mod. And the author of Cosmetic Armor Reworked",
+  "logoFile": "assets/dojutsu_slot/textures/logo.png",
+  "dependencies": ["required-after:narutomod"]
+}
+]

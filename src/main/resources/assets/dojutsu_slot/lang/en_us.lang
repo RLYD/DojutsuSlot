@@ -1,0 +1,44 @@
+dojutsu_slot.key.opendojutsuslotinventory=OpenDojutsuSlotInventory
+dojutsu_slot.gui.buttondojutsu=DojutsuSlot
+dojutsu_slot.gui.buttonnormal=NormalSlot
+dojutsu_slot.command.cleardojutsuinslot=/cleardojutsuinslot [player]
+dojutsu_slot.command.cleardojutsuinslot.success=Cleared the dojutsu slot inventory of %s
+
+gui.dojutsu_slot.mode.title=Select the Dojutsu Slot Mod's Mode
+gui.dojutsu_slot.mode.classic=Classic Mode
+gui.dojutsu_slot.mode.dojutsu=Dojutsu Mode
+
+dojutsu.state.left=Left Eye
+dojutsu.state.right=Right Eye
+dojutsu.state.format=Dojutsu State: %s
+
+key.categories.dojutsu_slot=Dojutsu Slot
+dojutsu_slot.key.custom_susanoo=Use the unlocked Susanoo
+
+commands.changedojutsuslotmode.invalid_mode=Invalid mode: %s. Use classic or dojutsu.
+commands.changedojutsuslotmode.no_data=Unable to get world data.
+commands.changedojutsuslotmode.success=World mode changed to: %s
+
+command.setsusanoocolor.usage=§cUsage: /setsusanoocolor <player> <color> (preset / hex(e.g. FFAA00) / random)
+command.setsusanoocolor.player_not_found=§cPlayer not found: %s
+command.setsusanoocolor.invalid_color=§cInvalid color: %s. Use preset, 6-digit hex, or 'random'.
+command.setsusanoocolor.success=§aSet %s's Susanoo color to #%s
+
+dojutsu.command.clearsusanoo.usage=Usage: %s
+dojutsu.command.clearsusanoo.cleared_color=Cleared %s's Susanoo color tag
+dojutsu.command.clearsusanoo.cleared_awakened=Cleared %s's Susanoo awakened tag
+dojutsu.command.clearsusanoo.cleared_all=Cleared all Susanoo tags for %s
+dojutsu.command.clearsusanoo.unknown=Unknown action: %s. Available: color, awakened, all
+dojutsu.command.clearsusanoo.warning_active=Note: %s had an active Susanoo, which has been forcibly retracted
+
+dojutsu.mode.classic=Classic Mode
+dojutsu.mode.dojutsu=Dojutsu Mode
+dojutsu.mode.set=World mode set to: %s
+dojutsu.mode.already_set=The mode has already been set and cannot be changed!
+
+dojutsu.slot.vanilla_helmet=Vanilla Helmet Slot
+dojutsu.slot.left_dojutsu=Left Dojutsu Slot
+dojutsu.slot.right_dojutsu=Right Dojutsu Slot
+
+dojutsu.state.active=Active
+dojutsu.state.inactive=Inactive

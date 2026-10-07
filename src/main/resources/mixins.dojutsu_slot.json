@@ -1,0 +1,74 @@
+{
+  "required": true,
+  "compatibilityLevel": "JAVA_8",
+  "package": "com.fuskirby.dojutsu_slot.mixin",
+  "minVersion": "0.8",
+  "setSourceFile": true,
+  "priority": 0,
+  "plugin": "com.fuskirby.dojutsu_slot.MixinPlugin",
+  "refmap": "mixins.dojutsu_slot.refmap.json",
+  "mixins": [
+    "key.MixinProcedureSpecialJutsuOnKeyPressed",
+    "key.MixinProcedurePowerIncreaseOnKeyPressed",
+
+    "dojutsu.MixinItemDojutsu",
+    "dojutsu.MixinItemByakugan",
+    "dojutsu.MixinItemSharingan",
+    "dojutsu.MixinItemMangekyoSharingan",
+    "dojutsu.MixinItemMangekyoSharinganObito",
+    "dojutsu.MixinItemRinnegan",
+
+    "sharingan.MixinProcedureSusanoo",
+    "sharingan.MixinEntitySusanooBase",
+    "sharingan.MixinProcedureSusanooSkeletonBodyTickEvent",
+    "sharingan.MixinItemSharinganBase",
+    "sharingan.MixinItemSharinganShrinkAmount",
+    "sharingan.MixinProcedureKamuiOnKeyPressed",
+    "sharingan.MixinEntitySusanooEntityCustom",
+    "sharingan.MixinEntitySusanooWingedEntityCustom",
+    "sharingan.MixinProcedureSharinganHelmetTickEvent",
+    "sharingan.MixinItemMangekyoSharinganEternalShrinkAmount",
+
+    "byakugan.MixinItemByakuganBase",
+
+    "rinnegan.MixinProcedureAnimalPath",
+    "rinnegan.MixinProcedureAsuraPathArmorBodyTickEvent",
+    "rinnegan.MixinProcedureNarakaPath",
+    "rinnegan.MixinItemRinneganBase",
+    "rinnegan.MixinProcedureRinneganHelmetTickEvent",
+    "rinnegan.MixinEntityPretaShieldEntityCustom",
+
+    "tenseigan.MixinItemTenseiganChakraModeRangedItem",
+
+    "MixinDojutsuAbilities",
+    "MixinProcedureUtils",
+    "MixinProcedureOnPlayerPostTick",
+    "MixinMedicalScrollGUIOnButtonClicked",
+    "MixinProcedureWhiteZetsuFleshFoodEaten",
+
+    "anbubingobook.MixinTrackerPlayerHook",
+    "anbubingobook.MixinProcedureevolve",
+
+    "ahznbcursemarkaddon.procedure.MixinProcedureSpecialJutsuOnKeyPressed",
+    "ahznbcursemarkaddon.procedure.MixinProcedurePowerIncreaseOnKeyPressed",
+    "ahznbcursemarkaddon.keybind.MixinKeyBindingSpecialJutsu",
+    "ahznbcursemarkaddon.MixinDojutsuAbilities",
+    "ahznbcursemarkaddon.procedure.MixinProcedureSusanoo",
+    "ahznbcursemarkaddon.procedure.MixinProcedureUrashikiRinneganSwitch",
+    "ahznbcursemarkaddon.procedure.MixinProcedureKetsuryuganOffActivate",
+    "ahznbcursemarkaddon.procedure.MixinProcedureKetsuryuganOnDeactivate",
+    "ahznbcursemarkaddon.procedure.MixinProcedureUtils",
+    "ahznbcursemarkaddon.procedure.MixinProcedureMadaraSwitch",
+    "ahznbcursemarkaddon.procedure.MixinProcedureMadaraSwitch$MixinProcedureMadaraSwitch_1",
+    "ahznbcursemarkaddon.item.MixinItemDojutsu2",
+    "ahznbcursemarkaddon.item.MixinItemJougan",
+    "ahznbcursemarkaddon.item.MixinItemMadaraRinnegan",
+    "ahznbcursemarkaddon.MixinMedicalScrollGUIOnButtonClicked"
+  ],
+  "client": [
+    "byakugan.MixinOverlayByakuganView",
+    "key.MixinKeyBindingSpecialJutsu"
+  ],
+  "server": [
+  ]
+}

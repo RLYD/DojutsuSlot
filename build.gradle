@@ -1,0 +1,82 @@
+buildscript {
+    repositories {
+        maven { url = "http://files.minecraftforge.net/maven" }
+        maven { url = 'https://repo.spongepowered.org/maven' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath 'org.spongepowered:mixingradle:0.6-SNAPSHOT'
+    }
+}
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'org.spongepowered.mixin'
+//Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+
+version = "1.2.2-For0.3.1"
+group = "com.fuskirby.dojutsu_slot" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "dojutsu_slot"
+
+sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+compileJava {
+    sourceCompatibility = targetCompatibility = '1.8'
+}
+
+minecraft {
+    version = "1.12.2-14.23.5.2768"
+    runDir = "run"
+    mappings = "snapshot_20171003"
+    runClient {
+        jvmArgs '-Dlog4j.configurationFile=log4j2_simple.xml'
+    }
+}
+
+mixin {
+    add sourceSets.main, "mixins.dojutsu_slot.refmap.json"
+}
+
+repositories {
+    maven {
+        url = "https://cursemaven.com"
+    }
+    maven {
+        url = "https://api.modrinth.com/maven"
+    }
+    maven {
+        url = "https://repo.spongepowered.org/maven"
+    }
+}
+
+dependencies {
+    compile "curse.maven:mixin-booter-419286:7049694"
+    compile "curse.maven:ahznbs-naruto-mod-831157:5967126"
+    //compileOnly files("libs/SpringAddon7.0.jar")
+    //compileOnly files("libs/dynamicdojutsu-1.3.9.7-0.3.1.jar")
+    compileOnly "curse.maven:anbu-bingo-book-for-ahznbs-shinobicraft-949952:6882632"
+    compileOnly "curse.maven:springaddon-980403:5744456"
+
+    compile 'org.apache.logging.log4j:log4j-core:2.25.4'
+    compile 'org.apache.logging.log4j:log4j-api:2.8.1'
+    compile 'org.apache.logging.log4j:log4j-iostreams:2.8.1'
+}
+
+processResources {
+    // this will ensure that this task is redone when the versions change.
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+                
+        // replace version and mcversion
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+        
+    // copy everything else except the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
