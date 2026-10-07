@@ -7,13 +7,11 @@ import com.google.gson.JsonParser;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.ModContainer;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -304,7 +302,107 @@ public class DojutsuTextureConfig {
     }
 
     public static void scanAndRegisterTextures() {
+        registerAddonrbnlModTextures();
         registerAhznbcursemarkaddonModTextures();
+    }
+
+    private static void registerAddonrbnlModTextures() {
+        // sharingan
+        registerTexture("addonrbnl", "mangekyosharinganazazaelhelmet",
+                "addonrbnl:textures/mangekyosharinganhelmet_azazael.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganhelmet_azazael_left.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganhelmet_azazael_right.png");
+
+        registerTexture("addonrbnl", "mangekyosharinganazazaeleternalhelmet",
+                "addonrbnl:textures/mangekyosharinganeternalhelmet_azazael.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganeternalhelmet_azazael_left.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganeternalhelmet_azazael_right.png");
+
+        registerTexture("addonrbnl", "mangekyosharinganfugakuhelmet",
+                "addonrbnl:textures/mangekyosharinganhelmet_fugaku.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganhelmet_fugaku_left.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganhelmet_fugaku_right.png");
+
+        registerTexture("addonrbnl", "mangekyosharinganindrahelmet",
+                "addonrbnl:textures/mangekyosharinganhelmet_indra.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganhelmet_indra_left.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganhelmet_indra_right.png");
+
+        registerTexture("addonrbnl", "mangekyosharinganindraeternalhelmet",
+                "addonrbnl:textures/mangekyosharinganeternalhelmet_indra.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganeternalhelmet_indra_left.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganeternalhelmet_indra_right.png");
+
+        registerTexture("addonrbnl", "mangekyosharinganitachihelmet",
+                "addonrbnl:textures/mangekyosharinganhelmet_itachi.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganhelmet_itachi_left.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganhelmet_itachi_right.png");
+
+        registerTexture("addonrbnl", "mangekyosharinganitachieternalhelmet",
+                "addonrbnl:textures/mangekyosharinganeternalhelmet_itachil.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganeternalhelmet_itachi_left.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganeternalhelmet_itachi_right.png");
+
+        registerTexture("addonrbnl", "mangekyosharinganizunahelmet",
+                "addonrbnl:textures/mangekyosharinganhelmet_izuna.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganhelmet_izuna_left.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganhelmet_izuna_right.png");
+
+        registerTexture("addonrbnl", "mangekyosharinganjikanhelmet",
+                "addonrbnl:textures/mangekyosharinganhelmet_jikan.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganhelmet_jikan_left.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganhelmet_jikan_right.png");
+
+        registerTexture("addonrbnl", "mangekyosharinganjikaneternalhelmet",
+                "addonrbnl:textures/mangekyosharinganeternalhelmet_jikan.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganeternalhelmet_jikan_left.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganeternalhelmet_jikan_right.png");
+
+        registerTexture("addonrbnl", "mangekyosharinganmadarahelmet",
+                "addonrbnl:textures/mangekyosharinganhelmet_madara.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganhelmet_madara_left.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganhelmet_madara_right.png");
+
+        registerTexture("addonrbnl", "mangekyosharinganmadaraeternalhelmet",
+                "addonrbnl:textures/mangekyosharinganeternalhelmet_madara.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganeternalhelmet_madara_left.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganeternalhelmet_madara_right.png");
+
+        registerTexture("addonrbnl", "mangekyosharingannakahelmet",
+                "addonrbnl:textures/mangekyosharinganhelmet_naka.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganhelmet_naka_left.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganhelmet_naka_right.png");
+
+        registerTexture("addonrbnl", "mangekyosharingannaorihelmet",
+                "addonrbnl:textures/mangekyosharinganhelmet_naori.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganhelmet_naori_left.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganhelmet_naori_right.png");
+
+        registerTexture("addonrbnl", "mangekyosharingannaorieternalhelmet",
+                "addonrbnl:textures/mangekyosharinganeternalhelmet_naori.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganeternalhelmet_naori_left.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganeternalhelmet_naori_right.png");
+
+        registerTexture("addonrbnl", "mangekyosharingansaradahelmet",
+                "addonrbnl:textures/mangekyosharinganhelmet_sarada.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganhelmet_sarada_left.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganhelmet_sarada_right.png");
+
+        registerTexture("addonrbnl", "mangekyosharinganshinhelmet",
+                "addonrbnl:textures/mangekyosharinganhelmet_shin.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganhelmet_shin_left.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganhelmet_shin_right.png");
+
+        registerTexture("addonrbnl", "mangekyosharinganshisuihelmet",
+                "addonrbnl:textures/mangekyosharinganhelmet_shisui.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganhelmet_shisui_left.png",
+                "dojutsu_slot:textures/compat/addonrbnl/sharingan/mangekyosharinganhelmet_shisui_right.png");
+
+        // scarleteyes
+        registerTexture("addonrbnl", "scarlet_eyeshelmet",
+                "addonrbnl:textures/scarleteyeshelmet.png",
+                "dojutsu_slot:textures/compat/addonrbnl/scarleteyes/scarleteyeshelmet_left.png",
+                "dojutsu_slot:textures/compat/addonrbnl/scarleteyes/scarleteyeshelmet_right.png");
     }
 
     private static void registerAhznbcursemarkaddonModTextures() {

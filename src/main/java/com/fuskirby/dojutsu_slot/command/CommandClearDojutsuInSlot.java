@@ -14,7 +14,8 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 
-public class CommandClearDojutsuInSlot extends CommandBase {
+public class CommandClearDojutsuInSlot extends CommandBase
+{
 
     @Override
     @ParametersAreNonnullByDefault

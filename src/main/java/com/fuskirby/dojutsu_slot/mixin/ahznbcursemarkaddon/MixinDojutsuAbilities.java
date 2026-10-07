@@ -1,11 +1,11 @@
 package com.fuskirby.dojutsu_slot.mixin.ahznbcursemarkaddon;
 
 import com.fuskirby.dojutsu_slot.util.DojutsuSlotHelper;
+import net.mcreator.ahznbcursemarkaddon.procedure.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.mcreator.ahznbcursemarkaddon.procedure.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -44,8 +44,8 @@ import java.util.Map;
             ProcedureKetsuryuganExplosive.class,
             ProcedureDuduEdotensei.class,
             ProcedureMangekyoSusanooArmor.class,
-            ProcedureBlueToRedSwitch.class,
             ProcedureRedToBlueSwitch.class,
+            ProcedureBlueToRedSwitch.class,
             ProcedureChakraDrain.class,
             ProcedureKinganHakkeshoKaiten.class,
             ProcedureByakusharinganHakkeshoKaiten.class,
@@ -57,8 +57,7 @@ import java.util.Map;
     remap = false)
 public class MixinDojutsuAbilities {
 
-    @Unique
-    private static EntityPlayer player = null;
+    @Unique private static EntityPlayer player = null;
 
     @Inject(method = "executeProcedure", at = @At(value = "HEAD"))
     private static void getPlayer(Map<String, Object> dependencies, CallbackInfo ci) {
@@ -70,7 +69,8 @@ public class MixinDojutsuAbilities {
 
     @Redirect(method = "executeProcedure",
             at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/util/NonNullList;get(I)Ljava/lang/Object;"))
+                    target = "Lnet/minecraft/util/NonNullList;get(I)Ljava/lang/Object;"),
+            remap = false)
     private static Object redirectGetHelmet(NonNullList<ItemStack> instance, int index) {
         if (index == 3) {
             if (player != null) {

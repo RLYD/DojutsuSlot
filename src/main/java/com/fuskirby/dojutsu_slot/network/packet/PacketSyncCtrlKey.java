@@ -9,7 +9,8 @@ public class PacketSyncCtrlKey extends NetworkPacket {
 
     private boolean ctrlPressed;
 
-    public PacketSyncCtrlKey() {}
+    public PacketSyncCtrlKey() {
+    }
 
     public PacketSyncCtrlKey(boolean ctrlPressed) {
         this.ctrlPressed = ctrlPressed;

@@ -51,7 +51,7 @@ public class MixinMedicalScrollGUIOnButtonClicked {
         String state0 = DojutsuSlotHelper.getDojutsuState(stack0);
         String state1 = DojutsuSlotHelper.getDojutsuState(stack1);
 
-        if (state0 == null || state1 == null || !state0.equals(state1)) {
+        if (state0 == null || !state0.equals(state1)) {
             ci.cancel();
         } else {
             pendingState.put(player, state0);

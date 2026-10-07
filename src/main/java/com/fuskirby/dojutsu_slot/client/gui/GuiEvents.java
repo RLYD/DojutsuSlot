@@ -19,7 +19,8 @@ public class GuiEvents
 {
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
-    public void guiPostAction(GuiScreenEvent.ActionPerformedEvent.Post event) {
+    public void guiPostAction(GuiScreenEvent.ActionPerformedEvent.Post event)
+    {
         if (event.getGui() instanceof GuiInventory || event.getGui() instanceof GuiDojutsuSlotInventory)
         {
             GuiContainer gui = (GuiContainer) event.getGui();
@@ -65,7 +66,8 @@ public class GuiEvents
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
-    public void guiPostInit(GuiScreenEvent.InitGuiEvent.Post event) {
+    public void guiPostInit(GuiScreenEvent.InitGuiEvent.Post event)
+    {
         if (event.getGui() instanceof GuiInventory || event.getGui() instanceof GuiDojutsuSlotInventory)
         {
             GuiContainer gui = (GuiContainer) event.getGui();
@@ -80,7 +82,8 @@ public class GuiEvents
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
-    public void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
+    public void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event)
+    {
         if ("dojutsu_slot".equals(event.getModID()))
             ModConfigs.loadConfigs(ModConfigs.getLastConfig());
     }

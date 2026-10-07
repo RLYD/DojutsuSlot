@@ -8,9 +8,6 @@
   "plugin": "com.fuskirby.dojutsu_slot.MixinPlugin",
   "refmap": "mixins.dojutsu_slot.refmap.json",
   "mixins": [
-    "key.MixinProcedureSpecialJutsuOnKeyPressed",
-    "key.MixinProcedurePowerIncreaseOnKeyPressed",
-
     "dojutsu.MixinItemDojutsu",
     "dojutsu.MixinItemByakugan",
     "dojutsu.MixinItemSharingan",
@@ -18,25 +15,31 @@
     "dojutsu.MixinItemMangekyoSharinganObito",
     "dojutsu.MixinItemRinnegan",
 
+    "byakugan.MixinOverlayByakuganView",
+    "byakugan.MixinItemByakuganBase",
+
     "sharingan.MixinProcedureSusanoo",
     "sharingan.MixinEntitySusanooBase",
     "sharingan.MixinProcedureSusanooSkeletonBodyTickEvent",
     "sharingan.MixinItemSharinganBase",
+    "sharingan.MixinItemSharinganPlayerHook",
     "sharingan.MixinItemSharinganShrinkAmount",
-    "sharingan.MixinProcedureKamuiOnKeyPressed",
+    "sharingan.MixinItemMangekyoSharinganObitoBase",
+    "sharingan.MixinItemMangekyoSharinganEternalBase",
     "sharingan.MixinEntitySusanooEntityCustom",
     "sharingan.MixinEntitySusanooWingedEntityCustom",
     "sharingan.MixinProcedureSharinganHelmetTickEvent",
     "sharingan.MixinItemMangekyoSharinganEternalShrinkAmount",
 
-    "byakugan.MixinItemByakuganBase",
+    "key.MixinProcedurePowerIncreaseOnKeyPressed",
+    "key.MixinProcedureSpecialJutsu1OnKeyPressed",
+    "key.MixinProcedureSpecialJutsu2OnKeyPressed",
+    "key.MixinProcedureSpecialJutsu3OnKeyPressed",
 
-    "rinnegan.MixinProcedureAnimalPath",
     "rinnegan.MixinProcedureAsuraPathArmorBodyTickEvent",
     "rinnegan.MixinProcedureNarakaPath",
     "rinnegan.MixinItemRinneganBase",
     "rinnegan.MixinProcedureRinneganHelmetTickEvent",
-    "rinnegan.MixinEntityPretaShieldEntityCustom",
 
     "tenseigan.MixinItemTenseiganChakraModeRangedItem",
 
@@ -46,8 +49,30 @@
     "MixinMedicalScrollGUIOnButtonClicked",
     "MixinProcedureWhiteZetsuFleshFoodEaten",
 
-    "anbubingobook.MixinTrackerPlayerHook",
     "anbubingobook.MixinProcedureevolve",
+    "anbubingobook.MixinTrackerPlayerHook",
+
+    "addonrbnl.MixinDojutsuAbilities",
+    "addonrbnl.item.MixinItemMangekyoSharinganAzazael",
+    "addonrbnl.item.MixinItemMangekyoSharinganIndra",
+    "addonrbnl.item.MixinItemMangekyoSharinganItachi",
+    "addonrbnl.item.MixinItemMangekyosharinganjikan",
+    "addonrbnl.item.MixinItemMangekyoSharinganNaori",
+    "addonrbnl.item.MixinItemMangekyoSharinganSarada",
+    "addonrbnl.item.MixinItemMangekyoSharinganShin",
+    "addonrbnl.item.MixinItemMangekyoSharinganShisui",
+    "addonrbnl.item.MixinItemSharinganLeft",
+    "addonrbnl.item.MixinItemSharinganLeftPlayerHook",
+    "addonrbnl.item.MixinItemSharinganRight",
+    "addonrbnl.item.MixinItemSharinganRightPlayerHook",
+    "addonrbnl.item.MixinItemDojutsu",
+    "addonrbnl.item.MixinItemGoldenByakugan",
+    "addonrbnl.item.MixinItemRinneganRaba",
+    "addonrbnl.item.MixinItemRinneganRabaBase",
+    "addonrbnl.item.MixinItemScarletEyes",
+    "addonrbnl.item.MixinItemScarletEyesBase",
+    "addonrbnl.MixinMedicalScrollGUIOnButtonClicked",
+    "addonrbnl.MixinItemMangekyoSharinganEternalShrinkAmount",
 
     "ahznbcursemarkaddon.procedure.MixinProcedureSpecialJutsuOnKeyPressed",
     "ahznbcursemarkaddon.procedure.MixinProcedurePowerIncreaseOnKeyPressed",
@@ -66,9 +91,13 @@
     "ahznbcursemarkaddon.MixinMedicalScrollGUIOnButtonClicked"
   ],
   "client": [
-    "byakugan.MixinOverlayByakuganView",
-    "key.MixinKeyBindingSpecialJutsu"
+    "key.MixinKeyBindingSpecialJutsu",
+    "key.MixinKeyBindingSpecialJutsu1"
   ],
   "server": [
-  ]
+    "addonrbnl.procedure.MixinProcedureTsukoyomi"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
 }

@@ -15,8 +15,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(value = ItemMangekyoSharinganObito.class, remap = false)
 public class MixinItemMangekyoSharinganObito {
 
-    @Shadow private static final double INTANGIBLE_CHAKRA_USAGE = 2.0F;
-    @Shadow private static final double TELEPORT_CHAKRA_USAGE = 20.0F;
+    @Shadow public static final double INTANGIBLE_CHAKRA_USAGE = 2.0F;
+    @Shadow public static final double TELEPORT_CHAKRA_USAGE = 20.0F;
 
     @Inject(method = "getIntangibleChakraUsage", at = @At("RETURN"), cancellable = true)
     private static void getIntangibleChakraUsage(EntityLivingBase entity, CallbackInfoReturnable<Double> cir) {
@@ -54,4 +54,14 @@ public class MixinItemMangekyoSharinganObito {
             cir.cancel();
         }
     }
+
+//    @Redirect(method = "getIntangibleChakraUsage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/EntityLivingBase;func_184582_a(Lnet/minecraft/inventory/EntityEquipmentSlot;)Lnet/minecraft/item/ItemStack;"))
+//    private static ItemStack getIntangibleChakraUsage(EntityLivingBase instance, EntityEquipmentSlot entityEquipmentSlot) {
+//        return DojutsuSlotHelper.selectDojutsuForJutsu((EntityPlayer) instance);
+//    }
+//
+//    @Redirect(method = "getTeleportChakraUsage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/EntityLivingBase;func_184582_a(Lnet/minecraft/inventory/EntityEquipmentSlot;)Lnet/minecraft/item/ItemStack;"))
+//    private static ItemStack getTeleportChakraUsage(EntityLivingBase instance, EntityEquipmentSlot entityEquipmentSlot) {
+//        return DojutsuSlotHelper.selectDojutsuForJutsu((EntityPlayer) instance);
+//    }
 }

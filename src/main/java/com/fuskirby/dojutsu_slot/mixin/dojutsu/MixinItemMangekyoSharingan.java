@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(value = ItemMangekyoSharingan.class, remap = false)
 public class MixinItemMangekyoSharingan {
 
-    @Shadow private static final double AMATERASU_CHAKRA_USAGE = 100.0F;
+    @Shadow public static final double AMATERASU_CHAKRA_USAGE = 100.0F;
 
     @Inject(method = "getAmaterasuChakraUsage", at = @At("RETURN"), cancellable = true)
     private static void getAmaterasuChakraUsage(EntityLivingBase entity, CallbackInfoReturnable<Double> cir) {

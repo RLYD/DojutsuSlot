@@ -1,11 +1,12 @@
 package com.fuskirby.dojutsu_slot.data;
 
 import com.fuskirby.dojutsu_slot.enums.WorldMode;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import net.minecraft.world.storage.WorldSavedData;
-import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.WorldServer;
+import net.minecraft.world.storage.MapStorage;
+import net.minecraft.world.storage.WorldSavedData;
 
 public class ModWorldData extends WorldSavedData {
     private static final String DATA_NAME = "dojutsu_slot_world_mode";
@@ -29,6 +30,7 @@ public class ModWorldData extends WorldSavedData {
     }
 
     @Override
+    @MethodsReturnNonnullByDefault
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         compound.setString("DojutsuMode", mode.name());
         compound.setBoolean("ModeSet", modeSet);
@@ -56,10 +58,8 @@ public class ModWorldData extends WorldSavedData {
         ModWorldData instance = null;
         if (storage != null) {
             instance = (ModWorldData) storage.getOrLoadData(ModWorldData.class, DATA_NAME);
-        }
-        if (instance == null) {
-            instance = new ModWorldData();
-            if (storage != null) {
+            if (instance == null) {
+                instance = new ModWorldData();
                 storage.setData(DATA_NAME, instance);
             }
         }

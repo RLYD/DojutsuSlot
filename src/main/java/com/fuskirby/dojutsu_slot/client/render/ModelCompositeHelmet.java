@@ -6,8 +6,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.client.renderer.GlStateManager;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 public class ModelCompositeHelmet extends ModelBiped {
     private final ModelBiped helmetModel;
     private final ModelBiped leftModel;
@@ -35,7 +33,6 @@ public class ModelCompositeHelmet extends ModelBiped {
     }
 
     @Override
-    @ParametersAreNonnullByDefault
     public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         syncModel(helmetModel);
         syncModel(leftModel);

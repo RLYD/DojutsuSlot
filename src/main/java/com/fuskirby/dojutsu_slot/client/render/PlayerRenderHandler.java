@@ -153,8 +153,8 @@ public class PlayerRenderHandler
         ItemStack slot2 = dojutsuSlot.getStackInSlot(2);
         ItemStack slot3 = dojutsuSlot.getStackInSlot(3);
 
-        ItemStack leftEyeStack = !slot2.isEmpty() ? slot2 : slot1;
-        ItemStack rightEyeStack = !slot3.isEmpty() ? slot3 : slot0;
+        ItemStack leftEyeStack = !slot3.isEmpty() ? slot3 : slot1;
+        ItemStack rightEyeStack = !slot2.isEmpty() ? slot2 : slot0;
 
         if (!rightEyeStack.isEmpty() || !leftEyeStack.isEmpty()) {
             ResourceLocation leftTex = getDojutsuTexture(player, leftEyeStack, 1);
@@ -240,7 +240,7 @@ public class PlayerRenderHandler
 
         private void applyDojutsuEffects(EntityPlayer player, ItemStack dojutsuStack, int slot) {
             if (dojutsuStack.getItem() instanceof net.minecraft.item.ItemArmor) {
-                dojutsuStack.getItem().onArmorTick(player.world, player, dojutsuStack);
+                (dojutsuStack.getItem()).onArmorTick(player.world, player, dojutsuStack);
             }
 
             if (isNarutomodDojutsu(dojutsuStack)) {

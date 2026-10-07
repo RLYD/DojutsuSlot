@@ -13,8 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.client.FMLClientHandler;
 
-public class PacketSyncDojutsuSlot extends NetworkPacket
-{
+public class PacketSyncDojutsuSlot extends NetworkPacket {
 
     UUID uuid;
     int slot;
@@ -45,13 +44,10 @@ public class PacketSyncDojutsuSlot extends NetworkPacket
 
         uuid = new UUID(pb.readLong(), pb.readLong());
         slot = pb.readByte();
-        try
-        {
+        try {
             itemDojutsu = pb.readItemStack();
         }
-        catch (IOException ignored)
-        {
-        }
+        catch (IOException ignored) {}
     }
 
     @Override

@@ -1,9 +1,10 @@
 package com.fuskirby.dojutsu_slot.event;
 
 import com.fuskirby.dojutsu_slot.DojutsuSlot;
-import com.fuskirby.dojutsu_slot.enums.WorldMode;
+import com.fuskirby.dojutsu_slot.DojutsuSlotContext;
 import com.fuskirby.dojutsu_slot.inventory.InventoryDojutsuSlot;
 import com.fuskirby.dojutsu_slot.util.WorldModeHelper;
+import com.fuskirby.dojutsu_slot.enums.WorldMode;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;

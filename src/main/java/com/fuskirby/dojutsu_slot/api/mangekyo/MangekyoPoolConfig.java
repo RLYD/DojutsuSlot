@@ -82,7 +82,28 @@ class MangekyoPoolConfig {
         ));
     }
 
-    static void scanAndRegisterMangekyos() {}
+    static void scanAndRegisterMangekyos() {
+        registerAddonrbnlMangekyos();
+    }
+
+    private static void registerAddonrbnlMangekyos() {
+        List<String> ids = Arrays.asList(
+                "addonrbnl:mangekyosharinganitachihelmet",
+                "addonrbnl:mangekyosharinganfugakuihelmet",
+                "addonrbnl:mangekyosharinganshisuihelmet",
+                "addonrbnl:mangekyosharingansaradahelmet",
+                "addonrbnl:mangekyosharinganazazaelhelmet",
+                "addonrbnl:mangekyosharinganjikanhelmet",
+                "addonrbnl:mangekyosharinganshinhelmet",
+                "addonrbnl:mangekyosharinganmadarahelmet",
+                "addonrbnl:mangekyosharinganizunahelmet",
+                "addonrbnl:mangekyosharinganindrahelmet",
+                "addonrbnl:mangekyosharingannakahelmet",
+                "addonrbnl:mangekyosharingannaorihelmet"
+        );
+        registerMangekyosForMod("addonrbnl", ids);
+        System.out.println("[DojutsuSlot] Registered " + ids.size() + " mangekyo items for addonrbnl");
+    }
 
     static void lockAndBuildPool() {
         if (locked) return;

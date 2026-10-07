@@ -43,7 +43,7 @@ public class RinneganAttributeHelper {
         ItemStack slot3 = dojutsuSlot.getStackInSlot(3);
 
         return (isRinneganAndActivated(slot0) || isRinneganAndActivated(slot1)
-        || isRinneganAndActivated(slot2) || isRinneganAndActivated(slot3));
+                || isRinneganAndActivated(slot2) || isRinneganAndActivated(slot3));
     }
 
     private static boolean isRinneganAndActivated(ItemStack stack) {

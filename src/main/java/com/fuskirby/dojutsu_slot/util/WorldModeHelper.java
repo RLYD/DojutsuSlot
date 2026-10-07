@@ -1,8 +1,8 @@
 package com.fuskirby.dojutsu_slot.util;
 
+import com.fuskirby.dojutsu_slot.client.ClientModeCache;
 import com.fuskirby.dojutsu_slot.data.ModWorldData;
 import com.fuskirby.dojutsu_slot.enums.WorldMode;
-import com.fuskirby.dojutsu_slot.client.ClientModeCache;
 import net.minecraft.world.World;
 
 public class WorldModeHelper {

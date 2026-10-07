@@ -7,6 +7,8 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 public class GUIModeSelection extends GuiScreen {
     private GuiButton classicButton;
     private GuiButton dojutsuButton;
@@ -23,6 +25,7 @@ public class GUIModeSelection extends GuiScreen {
     }
 
     @Override
+    @ParametersAreNonnullByDefault
     protected void actionPerformed(GuiButton button) {
         if (button == classicButton) {
             selectMode(WorldMode.CLASSIC);

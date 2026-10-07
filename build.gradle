@@ -15,7 +15,7 @@ apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = "1.2.2-For0.3.1"
+version = "1.2.2-For0.3.2"
 group = "com.fuskirby.dojutsu_slot" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "dojutsu_slot"
 
@@ -25,12 +25,10 @@ compileJava {
 }
 
 minecraft {
-    version = "1.12.2-14.23.5.2768"
+    version = "1.12.2-14.23.5.2847"
     runDir = "run"
+
     mappings = "snapshot_20171003"
-    runClient {
-        jvmArgs '-Dlog4j.configurationFile=log4j2_simple.xml'
-    }
 }
 
 mixin {
@@ -51,15 +49,12 @@ repositories {
 
 dependencies {
     compile "curse.maven:mixin-booter-419286:7049694"
-    compile "curse.maven:ahznbs-naruto-mod-831157:5967126"
+    compile files("libs/narutomod-0.3.2-beta.jar")
+    //compileOnly files("libs/The_Shinobi_Way_V1.2.jar")
     //compileOnly files("libs/SpringAddon7.0.jar")
-    //compileOnly files("libs/dynamicdojutsu-1.3.9.7-0.3.1.jar")
     compileOnly "curse.maven:anbu-bingo-book-for-ahznbs-shinobicraft-949952:6882632"
     compileOnly "curse.maven:springaddon-980403:5744456"
-
-    compile 'org.apache.logging.log4j:log4j-core:2.25.4'
-    compile 'org.apache.logging.log4j:log4j-api:2.8.1'
-    compile 'org.apache.logging.log4j:log4j-iostreams:2.8.1'
+    compileOnly "curse.maven:the-shinobi-way-raba-addon-ahznb-narutomod-1089964:6807223"
 }
 
 processResources {

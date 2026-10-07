@@ -26,7 +26,7 @@ import net.narutomod.item.ItemDojutsu;
 public class ContainerDojutsuSlot extends ContainerPlayer
 {
 
-    private final int dojutsuSlotCount;
+    private int dojutsuSlotCount;
 
     public class EnhancedDojutsuSlot extends Slot {
         private final EntityPlayer player;
@@ -47,8 +47,6 @@ public class ContainerDojutsuSlot extends ContainerPlayer
             ItemStack stack = this.getStack();
             if (!stack.isEmpty()) {
                 if (stack.getItem() instanceof net.minecraft.item.ItemArmor) {
-                    net.minecraft.item.ItemArmor armor = (net.minecraft.item.ItemArmor) stack.getItem();
-
                     net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(
                             new net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent(
                                     player, net.minecraft.inventory.EntityEquipmentSlot.HEAD,
@@ -77,12 +75,12 @@ public class ContainerDojutsuSlot extends ContainerPlayer
         boolean isItemValidForSlot(int slot, ItemStack stack, EntityPlayer player);
     }
 
-    private static final ISlotValidator defaultValidator = new ISlotValidator() {
+    private static ISlotValidator defaultValidator = new ISlotValidator() {
         @Override
         public boolean isItemValidForSlot(int slot, ItemStack stack, EntityPlayer player) {
             if (!(stack.getItem() instanceof ItemDojutsu.Base)) {
                 if (Loader.isModLoaded("ahznbcursemarkaddon")) {
-                    if ((stack.getItem() instanceof net.mcreator.ahznbcursemarkaddon.item.ItemDojutsu2.Base)) return true;
+                    return stack.getItem() instanceof net.mcreator.ahznbcursemarkaddon.item.ItemDojutsu2.Base;
                 }
                 return false;
             }
@@ -144,7 +142,7 @@ public class ContainerDojutsuSlot extends ContainerPlayer
     public ContainerDojutsuSlot(InventoryPlayer invPlayer, InventoryDojutsuSlot invDojutsuSlot, EntityPlayer player) {
         super(invPlayer, !player.world.isRemote, player);
 
-        this.dojutsuSlotCount = getDojutsuSlotCount(player, player.world);
+        this.dojutsuSlotCount = getDojutsuSlotCount(player.world);
 
         for (int i = 0; i < this.dojutsuSlotCount; i++) {
             final int slotIndex = i;
@@ -160,7 +158,7 @@ public class ContainerDojutsuSlot extends ContainerPlayer
         }
     }
 
-    private static int getDojutsuSlotCount(EntityPlayer player, World world) {
+    private static int getDojutsuSlotCount(World world) {
         boolean hasAddon = Loader.isModLoaded("dojutsu_addon");
         if (!hasAddon) return 2;
 
@@ -190,12 +188,12 @@ public class ContainerDojutsuSlot extends ContainerPlayer
 
                 slot.onSlotChange(stack1, stack);
             }
-            else if (slotNumber < 5) // CraftingGrid
+            else if ((slotNumber >= 1) && (slotNumber < 5)) // CraftingGrid
             {
                 if (!mergeItemStack(stack1, 9, 45, false))
                     return ItemStack.EMPTY;
             }
-            else if (slotNumber < 9) // NormalArmor
+            else if ((slotNumber >= 5) && (slotNumber < 9)) // NormalArmor
             {
                 if (!mergeItemStack(stack1, 9, 45, false))
                     return ItemStack.EMPTY;
@@ -270,10 +268,7 @@ public class ContainerDojutsuSlot extends ContainerPlayer
         Item rinnegantomoe = ForgeRegistries.ITEMS.getValue(new ResourceLocation("dojutsu_addon", "rinnegan_tomoe_helmet"));
         if (stack.getItem() != rinnegantomoe) return;
 
-        boolean hasTag = false;
-        if (stack.getTagCompound() != null) {
-            hasTag = stack.hasTagCompound() && stack.getTagCompound().hasKey("dojutsu_state");
-        }
+        boolean hasTag = stack.hasTagCompound() && stack.getTagCompound().hasKey("dojutsu_state");
         if (!hasTag) {
             String state = (slotIndex == 2) ? "left" : "right";
             NBTTagCompound nbt = stack.getTagCompound();

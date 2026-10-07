@@ -9,13 +9,9 @@ import com.fuskirby.dojutsu_slot.command.CommandChangeDojutsuSlotMode;
 import com.fuskirby.dojutsu_slot.command.CommandClearDojutsuInSlot;
 import com.fuskirby.dojutsu_slot.command.CommandClearSusanooData;
 import com.fuskirby.dojutsu_slot.command.CommandSetSusanooColor;
-import com.fuskirby.dojutsu_slot.event.ArmorHandler;
-import com.fuskirby.dojutsu_slot.event.DojutsuEventHandler;
-import com.fuskirby.dojutsu_slot.event.PlayerDataHandler;
-import com.fuskirby.dojutsu_slot.event.PlayerLoginHandler;
+import com.fuskirby.dojutsu_slot.event.*;
 import com.fuskirby.dojutsu_slot.network.NetworkManager;
 import com.fuskirby.dojutsu_slot.network.packet.*;
-import com.fuskirby.dojutsu_slot.event.KamuiAttackHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Loader;
@@ -69,6 +65,7 @@ public class DojutsuSlot
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
+
         network.registerPacket(1, PacketSyncDojutsuSlot.class);
         network.registerPacket(2, PacketSyncCtrlKey.class);
         network.registerPacket(3, PacketOpenDojutsuSlotInventory.class);
@@ -151,6 +148,24 @@ public class DojutsuSlot
                 stack -> isRinnesharinganActivated(stack)
         );
 
+        if (Loader.isModLoaded("addonrbnl")) {
+            DojutsuTextureAPI.registerDojutsuTexture(
+                    "addonrbnl", "goldenbyakuganhelmet",
+                    "addonrbnl:textures/goldenbyakugan2helmet.png",
+                    "dojutsu_slot:textures/compat/addonrbnl/goldenbyakugan_left.png",
+                    "dojutsu_slot:textures/compat/addonrbnl/goldenbyakugan_right.png",
+                    stack -> !net.addonrbnl.item.ItemGoldenByakugan.isRinnesharinganActivated(stack)
+            );
+
+            DojutsuTextureAPI.registerDojutsuTexture(
+                    "addonrbnl", "goldenbyakuganhelmet",
+                    "narutomod:textures/byakurinnesharingan_helmet.png",
+                    "dojutsu_slot:textures/models/armor/byakugan/byakurinnesharingan_helmet_left.png",
+                    "dojutsu_slot:textures/models/armor/byakugan/byakurinnesharingan_helmet_right.png",
+                    stack -> net.addonrbnl.item.ItemGoldenByakugan.isRinnesharinganActivated(stack)
+            );
+        }
+
         if (Loader.isModLoaded("ahznbcursemarkaddon")) {
             // baseeyes
             DojutsuTextureAPI.registerDojutsuTexture(
@@ -159,7 +174,7 @@ public class DojutsuSlot
                     "dojutsu_slot:textures/compat/ahznbcursemarkaddon/boruto/base/helmet_left.png",
                     "dojutsu_slot:textures/compat/ahznbcursemarkaddon/boruto/base/helmet_right.png",
                     stack -> !net.mcreator.ahznbcursemarkaddon.procedure.ProcedureKokuganKarma.isKarmaActive() && !net.mcreator.ahznbcursemarkaddon.procedure.ProcedureJouganKarma.isKarmaActive()
-                    && !net.mcreator.ahznbcursemarkaddon.procedure.ProcedureCodeKarma.isKarmaActive() && !net.mcreator.ahznbcursemarkaddon.procedure.ProcedureJigenKarma.isKarmaActive()
+                            && !net.mcreator.ahznbcursemarkaddon.procedure.ProcedureCodeKarma.isKarmaActive() && !net.mcreator.ahznbcursemarkaddon.procedure.ProcedureJigenKarma.isKarmaActive()
             );
 
             DojutsuTextureAPI.registerDojutsuTexture(

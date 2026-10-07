@@ -46,7 +46,7 @@ public interface IDojutsuSlotAPI {
                     return true;
                 }
 
-                if (className.startsWith("net.narutomod.items.ItemDojutsu")) {
+                if (className.startsWith("net.narutomod.item.ItemDojutsu")) {
                     return true;
                 }
 

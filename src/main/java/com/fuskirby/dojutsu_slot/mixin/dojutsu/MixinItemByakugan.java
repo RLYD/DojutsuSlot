@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.narutomod.ElementsNarutomodMod;
 import net.narutomod.item.ItemByakugan;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -29,7 +30,7 @@ public abstract class MixinItemByakugan extends ElementsNarutomodMod.ModElement 
 
 //    @Inject(method = "getByakuganChakraUsage", at = @At("RETURN"), cancellable = true)
 //    private static void getByakuganChakraUsage(EntityLivingBase entity, CallbackInfoReturnable<Double> cir) {
-//        ItemStack stack = DojutsuSlotContext.getDojutsuFromCurrentSlot(entity);
+//        ItemStack stack = DojutsuSlotContext.getDojutsuFromCurrentSlot((EntityPlayer) entity);
 //        ItemStack dojutsu_left = DojutsuSlotHelper.getLeftDojutsu((EntityPlayer) entity);
 //        ItemStack dojutsu_right = DojutsuSlotHelper.getRightDojutsu((EntityPlayer) entity);
 //

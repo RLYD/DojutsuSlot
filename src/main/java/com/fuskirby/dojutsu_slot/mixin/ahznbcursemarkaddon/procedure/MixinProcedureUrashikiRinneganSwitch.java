@@ -13,6 +13,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
@@ -26,7 +27,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Map;
-import java.util.Objects;
 
 @Mixin(
         value = {
@@ -71,7 +71,7 @@ public class MixinProcedureUrashikiRinneganSwitch {
                     }
 
                     inv.setInventorySlotContents((DojutsuSlotContext.getCurrentSlot() - 1), rinnegan);
-                    world.playSound(null, player.getPosition(), Objects.requireNonNull(SoundEvent.REGISTRY.getObject(new ResourceLocation("ahznbcursemarkaddon:activatemangekyo"))), SoundCategory.NEUTRAL, 1.0F, 1.0F);
+                    world.playSound(null, player.getPosition(), SoundEvent.REGISTRY.getObject(new ResourceLocation("ahznbcursemarkaddon:activatemangekyo")), SoundCategory.NEUTRAL, 1.0F, 1.0F);
                     player.getEntityData().setDouble("madara_cd", NarutomodModVariables.world_tick + 200.0D);
                 }
                 entity.getEntityData().setBoolean("switch_rinnegan", true);

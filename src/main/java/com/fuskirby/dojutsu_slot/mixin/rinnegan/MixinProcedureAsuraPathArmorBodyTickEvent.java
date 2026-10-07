@@ -2,6 +2,7 @@ package com.fuskirby.dojutsu_slot.mixin.rinnegan;
 
 import com.fuskirby.dojutsu_slot.util.DojutsuSlotHelper;
 import net.narutomod.procedure.ProcedureAsuraPathArmorBodyTickEvent;
+import net.narutomod.item.ItemRinnegan;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.world.World;
 import net.minecraft.potion.PotionEffect;
@@ -11,7 +12,7 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.item.Item;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
@@ -45,38 +46,23 @@ public class MixinProcedureAsuraPathArmorBodyTickEvent {
         if (entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entity;
 
-            ItemStack helmetStack = player.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
-            ItemStack dojutsuLeft  = DojutsuSlotHelper.getLeftDojutsu(player);
-            ItemStack dojutsuRight = DojutsuSlotHelper.getRightDojutsu(player);
+            Item helmetItem = player.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem();
+            Item dojutsuLeft  = DojutsuSlotHelper.getLeftDojutsu(player).getItem();
+            Item dojutsuRight = DojutsuSlotHelper.getRightDojutsu(player).getItem();
 
-            ItemStack tomoeRinneganLeft = DojutsuSlotHelper.getLeftTomoeRinnegan(player);
-            ItemStack tomoeRinneganRight = DojutsuSlotHelper.getRightTomoeRinnegan(player);
+            Item tomoeRinneganLeft = DojutsuSlotHelper.getLeftTomoeRinnegan(player).getItem();
+            Item tomoeRinneganRight = DojutsuSlotHelper.getRightTomoeRinnegan(player).getItem();
 
-            ResourceLocation helmetReg = helmetStack.getItem().getRegistryName();
-            ResourceLocation leftReg   = dojutsuLeft.getItem().getRegistryName();
-            ResourceLocation rightReg  = dojutsuRight.getItem().getRegistryName();
-            ResourceLocation tomoeLeftReg = tomoeRinneganLeft.getItem().getRegistryName();
-            ResourceLocation tomoeRightReg = tomoeRinneganRight.getItem().getRegistryName();
-
-            ResourceLocation rinneganReg = new ResourceLocation("narutomod", "rinneganhelmet");
-            ResourceLocation tenseiganReg = new ResourceLocation("narutomod", "tenseiganhelmet");
-            ResourceLocation tomoeRinneganReg = new ResourceLocation("dojutsu_addon", "rinnegan_tomoe_helmet");
-
-            boolean hasRinnegan = rinneganReg.equals(helmetReg) || rinneganReg.equals(leftReg) || rinneganReg.equals(rightReg);
-            boolean hasTenseigan = tenseiganReg.equals(helmetReg) || tenseiganReg.equals(leftReg) || tenseiganReg.equals(rightReg);
-
-            boolean hasTomoeRinnegan = tomoeRinneganReg.equals(helmetReg)
-                    || (tomoeRinneganReg.equals(leftReg) || tomoeRinneganReg.equals(tomoeLeftReg))
-                    || (tomoeRinneganReg.equals(rightReg) || tomoeRinneganReg.equals(tomoeRightReg));
-
-            if (!(hasRinnegan || hasTenseigan || hasTomoeRinnegan)) {
+            if (!(helmetItem instanceof ItemRinnegan.Base
+                    || (dojutsuLeft instanceof ItemRinnegan.Base || tomoeRinneganLeft instanceof ItemRinnegan.Base)
+                    || (dojutsuRight instanceof ItemRinnegan.Base || tomoeRinneganRight instanceof ItemRinnegan.Base)
+            )) {
                 itemstack.shrink(1);
                 return;
             }
         } else {
             itemstack.shrink(1);
             return;
-
         }
         double ticks_used = 0;
         if ((itemstack).getTagCompound() != null) {

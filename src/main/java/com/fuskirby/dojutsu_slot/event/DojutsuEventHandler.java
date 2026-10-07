@@ -92,6 +92,17 @@ public class DojutsuEventHandler {
                     setMangekyoItem(stack);
                 }
 
+                if (Loader.isModLoaded("addonrbnl")) {
+                    if (stack.getItem() == net.addonrbnl.item.ItemSharinganLeft.helmet) {
+                        DojutsuSlotHelper.setDojutsuState(stack, "left");
+                        continue;
+                    }
+                    if (stack.getItem() == net.addonrbnl.item.ItemSharinganRight.helmet) {
+                        DojutsuSlotHelper.setDojutsuState(stack, "right");
+                        continue;
+                    }
+                }
+
                 ItemStack left = stack.copy();
                 DojutsuSlotHelper.setDojutsuState(left, "left");
                 ItemStack right = stack.copy();

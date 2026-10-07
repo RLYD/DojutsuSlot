@@ -59,6 +59,7 @@ public class UtilKamuiHelper {
         return surfaceDist <= CLOSE_DISTANCE ? target : null;
     }
 
+
     public static boolean tryRightEyeTeleport(EntityPlayer player) {
         Entity attackTarget = getAttackRecordTarget(player);
         if (attackTarget != null) {

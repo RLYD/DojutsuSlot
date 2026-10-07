@@ -10,6 +10,7 @@
   "authorList": ["RLYD_Fuskirby"],
   "credits": "Thanks to AHZNB for Naruto Mod. And the author of Cosmetic Armor Reworked",
   "logoFile": "assets/dojutsu_slot/textures/logo.png",
+  "useDependencyInformation": true,
   "dependencies": ["required-after:narutomod"]
 }
 ]

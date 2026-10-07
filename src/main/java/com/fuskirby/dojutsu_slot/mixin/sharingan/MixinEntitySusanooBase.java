@@ -21,8 +21,7 @@ public class MixinEntitySusanooBase {
 
     @Redirect(method = "<init>(Lnet/minecraft/entity/EntityLivingBase;)V",
             at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/entity/EntityLivingBase;func_184582_a(Lnet/minecraft/inventory/EntityEquipmentSlot;)Lnet/minecraft/item/ItemStack;"),
-            remap = false)
+                    target = "Lnet/minecraft/entity/EntityLivingBase;func_184582_a(Lnet/minecraft/inventory/EntityEquipmentSlot;)Lnet/minecraft/item/ItemStack;"))
     private static ItemStack redirectGetHelmet(EntityLivingBase instance, EntityEquipmentSlot entityEquipmentSlot) {
         if (entityEquipmentSlot == EntityEquipmentSlot.HEAD) {
             if (instance instanceof EntityPlayer) {

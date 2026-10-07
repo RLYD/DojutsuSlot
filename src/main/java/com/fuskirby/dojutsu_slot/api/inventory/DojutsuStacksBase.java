@@ -26,7 +26,8 @@ public class DojutsuStacksBase implements IItemHandler, IItemHandlerModifiable, 
 
     protected NonNullList<ItemStack> stacks;
 
-    public DojutsuStacksBase() {
+    public DojutsuStacksBase()
+    {
         this(2);
     }
 
@@ -36,7 +37,8 @@ public class DojutsuStacksBase implements IItemHandler, IItemHandlerModifiable, 
     }
 
     @Override
-    public void deserializeNBT(NBTTagCompound nbt) {
+    public void deserializeNBT(NBTTagCompound nbt)
+    {
         setSize(nbt.hasKey("DojutsuSlot.Inventory.Size", Constants.NBT.TAG_INT) ? nbt.getInteger("DojutsuSlot.Inventory.Size") : stacks.size());
         NBTTagList tagList = nbt.getTagList("DojutsuSlot.Inventory", Constants.NBT.TAG_COMPOUND);
         for (int i = 0; i < tagList.tagCount(); i++)
@@ -54,7 +56,8 @@ public class DojutsuStacksBase implements IItemHandler, IItemHandlerModifiable, 
 
     @Nonnull
     @Override
-    public ItemStack extractItem(int slot, int amount, boolean simulate) {
+    public ItemStack extractItem(int slot, int amount, boolean simulate)
+    {
         if (amount == 0)
             return ItemStack.EMPTY;
 
@@ -102,18 +105,21 @@ public class DojutsuStacksBase implements IItemHandler, IItemHandlerModifiable, 
 
     @Nonnull
     @Override
-    public ItemStack getStackInSlot(int slot) {
+    public ItemStack getStackInSlot(int slot)
+    {
         validateSlotIndex(slot);
         return this.stacks.get(slot);
     }
 
-    protected int getStackLimit(int slot, @Nonnull ItemStack stack) {
+    protected int getStackLimit(int slot, @Nonnull ItemStack stack)
+    {
         return Math.min(getSlotLimit(slot), stack.getMaxStackSize());
     }
 
     @Nonnull
     @Override
-    public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+    public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate)
+    {
         if (stack.isEmpty())
             return ItemStack.EMPTY;
 
@@ -152,12 +158,17 @@ public class DojutsuStacksBase implements IItemHandler, IItemHandlerModifiable, 
         return reachedLimit ? ItemHandlerHelper.copyStackWithSize(stack, stack.getCount() - limit) : ItemStack.EMPTY;
     }
 
-    protected void onContentsChanged(int slot) {}
+    protected void onContentsChanged(int slot)
+    {
+    }
 
-    protected void onLoad() {}
+    protected void onLoad()
+    {
+    }
 
     @Override
-    public NBTTagCompound serializeNBT() {
+    public NBTTagCompound serializeNBT()
+    {
         NBTTagList nbtTagList = new NBTTagList();
         for (int i = 0; i < stacks.size(); i++)
         {
@@ -179,7 +190,8 @@ public class DojutsuStacksBase implements IItemHandler, IItemHandlerModifiable, 
     }
 
     @Override
-    public void setStackInSlot(int slot, @Nonnull ItemStack stack) {
+    public void setStackInSlot(int slot, @Nonnull ItemStack stack)
+    {
         validateSlotIndex(slot);
         if (ItemStack.areItemStacksEqual(stacks.get(slot), stack))
             return;
@@ -187,7 +199,8 @@ public class DojutsuStacksBase implements IItemHandler, IItemHandlerModifiable, 
         onContentsChanged(slot);
     }
 
-    protected void validateSlotIndex(int slot) {
+    protected void validateSlotIndex(int slot)
+    {
         if (slot < 0 || slot >= stacks.size())
             throw new RuntimeException("Slot " + slot + " not in valid range - [0," + stacks.size() + ")");
     }

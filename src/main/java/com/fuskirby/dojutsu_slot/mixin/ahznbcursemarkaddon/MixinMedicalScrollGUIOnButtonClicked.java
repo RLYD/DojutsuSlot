@@ -1,13 +1,13 @@
 package com.fuskirby.dojutsu_slot.mixin.ahznbcursemarkaddon;
 
 import com.fuskirby.dojutsu_slot.util.DojutsuSlotHelper;
-import net.mcreator.ahznbcursemarkaddon.procedure.ProcedureMedicalScrollGUIOnButtonClicked;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.mcreator.ahznbcursemarkaddon.procedure.ProcedureMedicalScrollGUIOnButtonClicked;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -31,7 +31,8 @@ public class MixinMedicalScrollGUIOnButtonClicked {
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/entity/player/EntityPlayerMP;func_192039_O()Lnet/minecraft/advancements/PlayerAdvancements;",
-                    ordinal = 0
+                    ordinal = 0,
+                    shift = At.Shift.BEFORE
             ),
             cancellable = true,
             remap = false

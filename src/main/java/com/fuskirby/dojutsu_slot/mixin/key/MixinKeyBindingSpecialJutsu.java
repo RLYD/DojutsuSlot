@@ -7,7 +7,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.narutomod.ElementsNarutomodMod;
 import net.narutomod.keybind.KeyBindingPowerIncrease;
-import net.narutomod.keybind.KeyBindingSpecialJutsu1;
 import net.narutomod.keybind.KeyBindingSpecialJutsu2;
 import net.narutomod.keybind.KeyBindingSpecialJutsu3;
 import org.lwjgl.input.Keyboard;
@@ -18,7 +17,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(
     value = {
-        KeyBindingSpecialJutsu1.class,
         KeyBindingSpecialJutsu2.class,
         KeyBindingSpecialJutsu3.class,
         KeyBindingPowerIncrease.class

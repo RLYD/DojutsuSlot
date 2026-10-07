@@ -65,8 +65,8 @@ public class MixinProcedureSusanoo {
         if (net.minecraftforge.fml.common.Loader.isModLoaded("dojutsu_slot")) {
             ItemStack left = DojutsuSlotHelper.getLeftDojutsu(player);
             ItemStack right = DojutsuSlotHelper.getRightDojutsu(player);
-            boolean leftValid = !left.isEmpty() && left.getItem() instanceof ItemDojutsu.Base;
-            boolean rightValid = !right.isEmpty() && right.getItem() instanceof ItemDojutsu.Base;
+            boolean leftValid = !left.isEmpty() && left.getItem() instanceof ItemSharingan.Base;
+            boolean rightValid = !right.isEmpty() && right.getItem() instanceof ItemSharingan.Base;
 
             if (leftValid && rightValid) {
                 EntityLivingBase leftOwner = ((ItemDojutsu.Base) left.getItem()).getOwner(left, player.world);
@@ -107,7 +107,7 @@ public class MixinProcedureSusanoo {
             if (helmet.getItem() instanceof ItemSharingan.Base) {
                 color = ((ItemSharingan.Base) helmet.getItem()).getColor(helmet);
             }
-        } else if (net.minecraftforge.fml.common.Loader.isModLoaded("dojutsu_slot")) {
+        } else {
             ItemStack left = DojutsuSlotHelper.getLeftDojutsu(player);
             if (!left.isEmpty() && left.getItem() instanceof ItemSharingan.Base) {
                 color = ((ItemSharingan.Base) left.getItem()).getColor(left);

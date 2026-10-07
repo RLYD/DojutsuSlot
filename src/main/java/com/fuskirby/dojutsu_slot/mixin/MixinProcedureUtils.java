@@ -32,7 +32,7 @@ public abstract class MixinProcedureUtils extends ElementsNarutomodMod.ModElemen
         }
     }
 
-    @Inject(method = "hasItemInInventory", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "hasItemInInventory*", at = @At("RETURN"), cancellable = true)
     private static void hasItemInInventory(EntityPlayer player, Item item, CallbackInfoReturnable<Boolean> cir) {
         InventoryDojutsuSlot dojutsuInv = DojutsuSlot.invMan.getDojutsuSlotInventory(player.getUniqueID());
         if (dojutsuInv != null) {

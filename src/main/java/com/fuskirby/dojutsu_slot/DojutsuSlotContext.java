@@ -14,7 +14,6 @@ public class DojutsuSlotContext {
     public static final int SLOT_LEFT_EXTENDED = 3;
     public static final int SLOT_RIGHT_EXTENDED = 4;
 
-    // 0: helmet, 1: left dojutsu slot, 2: right dojutsu slot
     public static void setCurrentSlot(int slotType) {
         CURRENT_SLOT_CONTEXT.set(slotType);
     }

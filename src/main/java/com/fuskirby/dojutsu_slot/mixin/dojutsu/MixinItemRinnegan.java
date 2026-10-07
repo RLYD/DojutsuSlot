@@ -1,7 +1,6 @@
 package com.fuskirby.dojutsu_slot.mixin.dojutsu;
 
 import com.fuskirby.dojutsu_slot.DojutsuSlot;
-import com.fuskirby.dojutsu_slot.DojutsuSlotContext;
 import com.fuskirby.dojutsu_slot.util.DojutsuSlotHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,13 +24,14 @@ import static net.narutomod.item.ItemRinnegan.isRinnesharinganActivated;
 @Mixin(value = ItemRinnegan.class, remap = false)
 public abstract class MixinItemRinnegan extends ElementsNarutomodMod.ModElement {
 
-    @Shadow private static final double SHINRATENSEI_CHAKRA_USAGE = 10d;
-    @Shadow private static final double CHIBAKUTENSEI_CHAKRA_USAGE = 5000d;
-    @Shadow private static final double NARAKAPATH_CHAKRA_USAGE = 100d;
-    @Shadow private static final double PRETAPATH_CHAKRA_USAGE = 10d;
-    @Shadow private static final double ANIMALPATH_CHAKRA_USAGE = 200d;
-    @Shadow private static final double OUTERPATH_CHAKRA_USAGE = 2000d;
-    @Shadow private static final double TENGAISHINSEI_CHAKRA_USAGE = 5000d;
+    @Shadow public static final double SHINRATENSEI_CHAKRA_USAGE = 10d;
+    @Shadow public static final double BANSHOTENIN_CHAKRA_USAGE = 0.5F;
+    @Shadow public static final double CHIBAKUTENSEI_CHAKRA_USAGE = 5000d;
+    @Shadow public static final double NARAKAPATH_CHAKRA_USAGE = 100d;
+    @Shadow public static final double PRETAPATH_CHAKRA_USAGE = 10d;
+    @Shadow public static final double ANIMALPATH_CHAKRA_USAGE = 200d;
+    @Shadow public static final double OUTERPATH_CHAKRA_USAGE = 2000d;
+    @Shadow public static final double TENGAISHINSEI_CHAKRA_USAGE = 5000d;
 
     public MixinItemRinnegan(ElementsNarutomodMod elements, int sortid) {
         super(elements, sortid);
@@ -41,17 +41,23 @@ public abstract class MixinItemRinnegan extends ElementsNarutomodMod.ModElement 
     private static void getShinratenseiChakraUsage(EntityLivingBase entity, CallbackInfoReturnable<Double> cir) {
         if (entity instanceof EntityPlayer) {
             ItemStack stack = DojutsuSlotHelper.selectRinneganTomoeForJutsu((EntityPlayer) entity);
-
-            boolean isRinnegan = stack.getItem() == ItemRinnegan.helmet;
-            boolean isTenseigan = stack.getItem() == ItemTenseigan.helmet;
-
-            Item rinnegan_tomoe = ForgeRegistries.ITEMS.getValue(new ResourceLocation("dojutsu_addon", "rinnegan_tomoe_helmet"));
-
-            boolean isRinneganTomoe = stack.getItem() == rinnegan_tomoe;
-
-            if ((isRinnegan || isRinneganTomoe) || isTenseigan) {
+            if (stack.getItem() instanceof ItemRinnegan.Base) {
                 boolean isOwner = ((ItemDojutsu.Base) stack.getItem()).isOwner(stack, entity);
                 double usage = isOwner ? SHINRATENSEI_CHAKRA_USAGE : SHINRATENSEI_CHAKRA_USAGE * 2;
+                cir.setReturnValue(usage);
+            } else {
+                cir.setReturnValue(Double.MAX_VALUE * 0.001d);
+            }
+        }
+    }
+
+    @Inject(method = "getBanshoteninChakraUsage", at = @At("RETURN"), cancellable = true)
+    private static void getBanshoteninChakraUsage(EntityLivingBase entity, CallbackInfoReturnable<Double> cir) {
+        if (entity instanceof EntityPlayer) {
+            ItemStack stack = DojutsuSlotHelper.selectRinneganTomoeForJutsu((EntityPlayer) entity);
+            if (stack.getItem() instanceof ItemRinnegan.Base) {
+                boolean isOwner = ((ItemDojutsu.Base) stack.getItem()).isOwner(stack, entity);
+                double usage = isOwner ? BANSHOTENIN_CHAKRA_USAGE : BANSHOTENIN_CHAKRA_USAGE * 2;
                 cir.setReturnValue(usage);
             } else {
                 cir.setReturnValue(Double.MAX_VALUE * 0.001d);
@@ -63,15 +69,7 @@ public abstract class MixinItemRinnegan extends ElementsNarutomodMod.ModElement 
     private static void getChibaukutenseiChakraUsage(EntityLivingBase entity, CallbackInfoReturnable<Double> cir) {
         if (entity instanceof EntityPlayer) {
             ItemStack stack = DojutsuSlotHelper.selectRinneganTomoeForJutsu((EntityPlayer) entity);
-
-            boolean isRinnegan = stack.getItem() == ItemRinnegan.helmet;
-            boolean isTenseigan = stack.getItem() == ItemTenseigan.helmet;
-
-            Item rinnegan_tomoe = ForgeRegistries.ITEMS.getValue(new ResourceLocation("dojutsu_addon", "rinnegan_tomoe_helmet"));
-
-            boolean isRinneganTomoe = stack.getItem() == rinnegan_tomoe;
-
-            if ((isRinnegan || isRinneganTomoe) || isTenseigan) {
+            if (stack.getItem() instanceof ItemRinnegan.Base) {
                 boolean isOwner = ((ItemDojutsu.Base) helmet).isOwner(stack, entity);
                 double usage = isOwner ? CHIBAKUTENSEI_CHAKRA_USAGE : CHIBAKUTENSEI_CHAKRA_USAGE * 2;
                 cir.setReturnValue(usage);
@@ -85,15 +83,7 @@ public abstract class MixinItemRinnegan extends ElementsNarutomodMod.ModElement 
     private static void getNarakaPathChakraUsage(EntityLivingBase entity, CallbackInfoReturnable<Double> cir) {
         if (entity instanceof EntityPlayer) {
             ItemStack stack = DojutsuSlotHelper.selectRinneganTomoeForJutsu((EntityPlayer) entity);
-
-            boolean isRinnegan = stack.getItem() == ItemRinnegan.helmet;
-            boolean isTenseigan = stack.getItem() == ItemTenseigan.helmet;
-
-            Item rinnegan_tomoe = ForgeRegistries.ITEMS.getValue(new ResourceLocation("dojutsu_addon", "rinnegan_tomoe_helmet"));
-
-            boolean isRinneganTomoe = stack.getItem() == rinnegan_tomoe;
-
-            if ((isRinnegan || isRinneganTomoe) || isTenseigan) {
+            if (stack.getItem() instanceof ItemRinnegan.Base) {
                 boolean isOwner = ((ItemDojutsu.Base) helmet).isOwner(stack, entity);
                 double usage = isOwner ? NARAKAPATH_CHAKRA_USAGE : NARAKAPATH_CHAKRA_USAGE * 2;
                 cir.setReturnValue(usage);
@@ -107,15 +97,7 @@ public abstract class MixinItemRinnegan extends ElementsNarutomodMod.ModElement 
     private static void getPretaPathChakraUsage(EntityLivingBase entity, CallbackInfoReturnable<Double> cir) {
         if (entity instanceof EntityPlayer) {
             ItemStack stack = DojutsuSlotHelper.selectRinneganTomoeForJutsu((EntityPlayer) entity);
-
-            boolean isRinnegan = stack.getItem() == ItemRinnegan.helmet;
-            boolean isTenseigan = stack.getItem() == ItemTenseigan.helmet;
-
-            Item rinnegan_tomoe = ForgeRegistries.ITEMS.getValue(new ResourceLocation("dojutsu_addon", "rinnegan_tomoe_helmet"));
-
-            boolean isRinneganTomoe = stack.getItem() == rinnegan_tomoe;
-
-            if ((isRinnegan || isRinneganTomoe) || isTenseigan) {
+            if (stack.getItem() instanceof ItemRinnegan.Base) {
                 boolean isOwner = ((ItemDojutsu.Base) helmet).isOwner(stack, entity);
                 double usage = isOwner ? PRETAPATH_CHAKRA_USAGE : PRETAPATH_CHAKRA_USAGE * 2;
                 cir.setReturnValue(usage);
@@ -129,15 +111,7 @@ public abstract class MixinItemRinnegan extends ElementsNarutomodMod.ModElement 
     private static void getAnimalPathChakraUsage(EntityLivingBase entity, CallbackInfoReturnable<Double> cir) {
         if (entity instanceof EntityPlayer) {
             ItemStack stack = DojutsuSlotHelper.selectRinneganTomoeForJutsu((EntityPlayer) entity);
-
-            boolean isRinnegan = stack.getItem() == ItemRinnegan.helmet;
-            boolean isTenseigan = stack.getItem() == ItemTenseigan.helmet;
-
-            Item rinnegan_tomoe = ForgeRegistries.ITEMS.getValue(new ResourceLocation("dojutsu_addon", "rinnegan_tomoe_helmet"));
-
-            boolean isRinneganTomoe = stack.getItem() == rinnegan_tomoe;
-
-            if ((isRinnegan || isRinneganTomoe) || isTenseigan) {
+            if (stack.getItem() instanceof ItemRinnegan.Base) {
                 boolean isOwner = ((ItemDojutsu.Base) helmet).isOwner(stack, entity);
                 double usage = isOwner ? ANIMALPATH_CHAKRA_USAGE : ANIMALPATH_CHAKRA_USAGE * 2;
                 cir.setReturnValue(usage);
@@ -151,15 +125,7 @@ public abstract class MixinItemRinnegan extends ElementsNarutomodMod.ModElement 
     private static void getOuterPathChakraUsage(EntityLivingBase entity, CallbackInfoReturnable<Double> cir) {
         if (entity instanceof EntityPlayer) {
             ItemStack stack = DojutsuSlotHelper.selectRinneganTomoeForJutsu((EntityPlayer) entity);
-
-            boolean isRinnegan = stack.getItem() == ItemRinnegan.helmet;
-            boolean isTenseigan = stack.getItem() == ItemTenseigan.helmet;
-
-            Item rinnegan_tomoe = ForgeRegistries.ITEMS.getValue(new ResourceLocation("dojutsu_addon", "rinnegan_tomoe_helmet"));
-
-            boolean isRinneganTomoe = stack.getItem() == rinnegan_tomoe;
-
-            if ((isRinnegan || isRinneganTomoe) || isTenseigan) {
+            if (stack.getItem() instanceof ItemRinnegan.Base) {
                 boolean isOwner = ((ItemDojutsu.Base) helmet).isOwner(stack, entity);
                 double usage = isOwner ? OUTERPATH_CHAKRA_USAGE : OUTERPATH_CHAKRA_USAGE * 2;
                 cir.setReturnValue(usage);
@@ -173,15 +139,7 @@ public abstract class MixinItemRinnegan extends ElementsNarutomodMod.ModElement 
     private static void getTengaishinseiChakraUsage(EntityLivingBase entity, CallbackInfoReturnable<Double> cir) {
         if (entity instanceof EntityPlayer) {
             ItemStack stack = DojutsuSlotHelper.selectDojutsuForJutsu((EntityPlayer) entity);
-
-            boolean isRinnegan = stack.getItem() == ItemRinnegan.helmet;
-            boolean isTenseigan = stack.getItem() == ItemTenseigan.helmet;
-
-            Item rinnegan_tomoe = ForgeRegistries.ITEMS.getValue(new ResourceLocation("dojutsu_addon", "rinnegan_tomoe_helmet"));
-
-            boolean isRinneganTomoe = stack.getItem() == rinnegan_tomoe;
-
-            if ((isRinnegan || isRinneganTomoe) || isTenseigan) {
+            if (stack.getItem() instanceof ItemRinnegan.Base) {
                 boolean isOwner = ((ItemDojutsu.Base) helmet).isOwner(stack, entity);
                 double usage = isOwner ? TENGAISHINSEI_CHAKRA_USAGE : TENGAISHINSEI_CHAKRA_USAGE * 2;
                 cir.setReturnValue(usage);
@@ -219,26 +177,16 @@ public abstract class MixinItemRinnegan extends ElementsNarutomodMod.ModElement 
 
             ItemStack helmetstack = player.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
             ItemStack dojutsu_left = dojutsuSlot.getStackInSlot(0);
-            ;
             ItemStack dojutsu_right = dojutsuSlot.getStackInSlot(1);
-            ;
 
             ItemStack rinnegantomoe_left = dojutsuSlot.getStackInSlot(2);
             ItemStack rinnegantomoe_right = dojutsuSlot.getStackInSlot(3);
 
-            Item rinnegantomoe = ForgeRegistries.ITEMS.getValue(new ResourceLocation("dojutsu_addon", "rinnegan_tomoe_helmet"));
+            boolean has_rinnegan = helmetstack.getItem() instanceof ItemRinnegan.Base
+                    || (dojutsu_left.getItem() instanceof ItemRinnegan.Base || rinnegantomoe_left.getItem() instanceof ItemRinnegan.Base)
+                    || (dojutsu_right.getItem() instanceof ItemRinnegan.Base || rinnegantomoe_right.getItem() instanceof ItemRinnegan.Base);
 
-            boolean has_rinnegan = helmetstack.getItem() == helmet
-                    || dojutsu_left.getItem() == helmet || dojutsu_right.getItem() == helmet;
-
-            boolean has_tenseigan = helmetstack.getItem() == ItemTenseigan.helmet
-                    || dojutsu_left.getItem() == ItemTenseigan.helmet || dojutsu_right.getItem() == ItemTenseigan.helmet;
-
-            boolean has_tomoe_rinnegan = helmetstack.getItem() == rinnegantomoe
-                    || dojutsu_left.getItem() == rinnegantomoe || dojutsu_right.getItem() == rinnegantomoe
-                    || rinnegantomoe_left.getItem() == rinnegantomoe || rinnegantomoe_right.getItem() == rinnegantomoe;
-
-            if ((has_rinnegan || has_tenseigan || has_tomoe_rinnegan) && (isRinnesharinganActivated(helmetstack)
+            if (has_rinnegan && (isRinnesharinganActivated(helmetstack)
                     || isRinnesharinganActivated(dojutsu_left) || isRinnesharinganActivated(dojutsu_right)
                     || isRinnesharinganActivated(rinnegantomoe_left) || isRinnesharinganActivated(rinnegantomoe_right))) {
                 cir.setReturnValue(true);

@@ -79,7 +79,11 @@ public class MixinProcedureRinneganHelmetTickEvent {
         }
     }
 
-    @ModifyArg(method = "executeProcedure", at = @At(value = "INVOKE", target = "Lnet/narutomod/item/ItemNinjutsu$RangedItem;enableJutsu(Lnet/minecraft/item/ItemStack;Lnet/narutomod/item/ItemJutsu$JutsuEnum;Z)V"), index = 1)
+    @ModifyArg(method = "executeProcedure",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/narutomod/item/ItemNinjutsu$RangedItem;enableJutsu(Lnet/minecraft/item/ItemStack;Lnet/narutomod/item/ItemJutsu$JutsuEnum;Z)V"),
+            index = 1)
     private static ItemJutsu.JutsuEnum enableJutsu(ItemJutsu.JutsuEnum par2) {
         Item rinnegantomoe = ForgeRegistries.ITEMS.getValue(new ResourceLocation("dojutsu_addon", "rinnegan_tomoe_helmet"));
         if (itemstack.getItem() == rinnegantomoe) {
@@ -91,10 +95,6 @@ public class MixinProcedureRinneganHelmetTickEvent {
     @Unique
     private static void setActivated(ItemStack stack) {
         if (stack.isEmpty()) return;
-
-        Item rinnegantomoe = ForgeRegistries.ITEMS.getValue(new ResourceLocation("dojutsu_addon", "rinnegan_tomoe_helmet"));
-        if ((stack.getItem() != ItemRinnegan.helmet) && (stack.getItem() != rinnegantomoe)) return;
-
         if (!stack.hasTagCompound()) {
             stack.setTagCompound(new NBTTagCompound());
         }
@@ -105,31 +105,16 @@ public class MixinProcedureRinneganHelmetTickEvent {
 
     @Unique
     private static boolean isRinneganBase(EntityPlayer player) {
-        ItemStack helmetStack = player.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
+        ItemStack helmet = player.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
         ItemStack dojutsuLeft  = DojutsuSlotHelper.getLeftDojutsu(player);
         ItemStack dojutsuRight = DojutsuSlotHelper.getRightDojutsu(player);
 
         ItemStack tomoeRinneganLeft = DojutsuSlotHelper.getLeftTomoeRinnegan(player);
         ItemStack tomoeRinneganRight = DojutsuSlotHelper.getRightTomoeRinnegan(player);
 
-        ResourceLocation helmetReg = helmetStack.getItem().getRegistryName();
-        ResourceLocation leftReg   = dojutsuLeft.getItem().getRegistryName();
-        ResourceLocation rightReg  = dojutsuRight.getItem().getRegistryName();
-        ResourceLocation tomoeLeftReg = tomoeRinneganLeft.getItem().getRegistryName();
-        ResourceLocation tomoeRightReg = tomoeRinneganRight.getItem().getRegistryName();
-
-        ResourceLocation rinneganReg = new ResourceLocation("narutomod", "rinneganhelmet");
-        ResourceLocation tenseiganReg = new ResourceLocation("narutomod", "tenseiganhelmet");
-        ResourceLocation tomoeRinneganReg = new ResourceLocation("dojutsu_addon", "rinnegan_tomoe_helmet");
-
-        boolean hasRinnegan = rinneganReg.equals(helmetReg) || rinneganReg.equals(leftReg) || rinneganReg.equals(rightReg);
-        boolean hasTenseigan = tenseiganReg.equals(helmetReg) || tenseiganReg.equals(leftReg) || tenseiganReg.equals(rightReg);
-
-        boolean hasTomoeRinnegan = tomoeRinneganReg.equals(helmetReg)
-                || (tomoeRinneganReg.equals(leftReg) || tomoeRinneganReg.equals(tomoeLeftReg))
-                || (tomoeRinneganReg.equals(rightReg) || tomoeRinneganReg.equals(tomoeRightReg));
-
-        return hasRinnegan || hasTenseigan || hasTomoeRinnegan;
+        return helmet.getItem() instanceof ItemRinnegan.Base
+                || (dojutsuLeft.getItem() instanceof ItemRinnegan.Base || tomoeRinneganLeft.getItem() instanceof ItemRinnegan.Base)
+                || (dojutsuRight.getItem() instanceof ItemRinnegan.Base || tomoeRinneganRight.getItem() instanceof ItemRinnegan.Base);
     }
 
     @Unique

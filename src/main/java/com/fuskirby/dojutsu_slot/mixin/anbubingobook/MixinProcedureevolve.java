@@ -42,6 +42,11 @@ public class MixinProcedureevolve {
     )
     private static void redirectGiveItem(EntityPlayer player, ItemStack mangekyo) {
         if (dojutsu == null || dojutsu.getTagCompound().hasKey("awakened")) return;
+
+        if (Loader.isModLoaded("addonrbnl")) {
+            Item randomItem = net.addonraba.util.KekkeiGenkai.MANGEKYO.getItem();
+            mangekyo = new ItemStack(randomItem, 1);
+        }
         mangekyo = createMangekyoFromNbt(dojutsu, mangekyo);
 
         NBTTagCompound tag = dojutsu.getTagCompound();

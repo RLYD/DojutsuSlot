@@ -2,8 +2,8 @@ package com.fuskirby.dojutsu_slot.event;
 
 import com.fuskirby.dojutsu_slot.DojutsuSlot;
 import com.fuskirby.dojutsu_slot.data.ModWorldData;
-import com.fuskirby.dojutsu_slot.network.packet.PacketSyncMode;
 import com.fuskirby.dojutsu_slot.network.packet.PacketOpenModeSelection;
+import com.fuskirby.dojutsu_slot.network.packet.PacketSyncMode;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;

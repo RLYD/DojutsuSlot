@@ -16,14 +16,16 @@ import net.minecraftforge.fml.common.network.FMLNetworkEvent.ClientDisconnection
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-public class InventoryManagerClient extends InventoryManager {
+public class InventoryManagerClient extends InventoryManager
+{
 
     LoadingCache<UUID, InventoryDojutsuSlot> cacheClient = CacheBuilder.newBuilder().build(new CacheLoader<UUID, InventoryDojutsuSlot>()
     {
 
         @Override
         @ParametersAreNonnullByDefault
-        public InventoryDojutsuSlot load(UUID owner) {
+        public InventoryDojutsuSlot load(UUID owner) throws Exception
+        {
             return new InventoryDojutsuSlot();
         }
 

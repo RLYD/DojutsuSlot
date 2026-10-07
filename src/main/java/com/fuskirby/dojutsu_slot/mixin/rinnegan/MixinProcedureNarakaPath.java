@@ -38,42 +38,41 @@ public abstract class MixinProcedureNarakaPath extends ElementsNarutomodMod.ModE
         Entity entity = (Entity) dependencies.get("entity");
         World world = (World) dependencies.get("world");
 
-        if (!(entity instanceof EntityPlayer)) {
+        if (!(entity instanceof EntityLivingBase)) {
             return;
         }
 
-        EntityPlayer player = (EntityPlayer) entity;
+        EntityLivingBase living = (EntityLivingBase) entity;
 
         ci.cancel();
 
-        ((EntityLivingBase) player).swingArm(net.minecraft.util.EnumHand.MAIN_HAND);
+        living.swingArm(net.minecraft.util.EnumHand.MAIN_HAND);
 
         if (!world.isRemote) {
+            boolean isPlayer = living instanceof EntityPlayer;
             boolean hasDojutsu = false;
 
-            ItemStack helmetStack = player.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
-            if (isRinneTenseiganHelmet(helmetStack)) {
+            ItemStack helmetStack = living.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
+            if (isRinneganBase(helmetStack)) {
                 hasDojutsu = true;
             }
 
-            ItemStack leftDojutsuStack = DojutsuSlotHelper.getLeftDojutsu(player);
-            ItemStack leftTomoeRinnegan = DojutsuSlotHelper.getLeftTomoeRinnegan(player);
+            if (isPlayer) {
+                EntityPlayer player = (EntityPlayer) living;
 
-            if (isRinneTenseiganHelmet(leftTomoeRinnegan)) {
-                hasDojutsu = true;
-            }
-            else if (isRinneTenseiganHelmet(leftDojutsuStack)) {
-                hasDojutsu = true;
-            }
+                if (isRinneganBase(DojutsuSlotHelper.getLeftTomoeRinnegan(player))) {
+                    hasDojutsu = true;
+                }
+                else if (isRinneganBase(DojutsuSlotHelper.getLeftDojutsu(player))) {
+                    hasDojutsu = true;
+                }
 
-            ItemStack rightDojutsuStack = DojutsuSlotHelper.getRightDojutsu(player);
-            ItemStack rightTomoeRinnegan = DojutsuSlotHelper.getRightTomoeRinnegan(player);
-
-            if (isRinneTenseiganHelmet(rightTomoeRinnegan)) {
-                hasDojutsu = true;
-            }
-            else if (isRinneTenseiganHelmet(rightDojutsuStack)) {
-                hasDojutsu = true;
+                if (isRinneganBase(DojutsuSlotHelper.getRightTomoeRinnegan(player))) {
+                    hasDojutsu = true;
+                }
+                else if (isRinneganBase(DojutsuSlotHelper.getRightDojutsu(player))) {
+                    hasDojutsu = true;
+                }
             }
 
             if (!hasDojutsu) {
@@ -86,27 +85,48 @@ public abstract class MixinProcedureNarakaPath extends ElementsNarutomodMod.ModE
                 entityUUID = ProcedureUtils.getUniqueId(helmetStack, "KoH_id");
             }
 
-            if (entityUUID == null && leftTomoeRinnegan.hasTagCompound()) {
-                entityUUID = ProcedureUtils.getUniqueId(leftTomoeRinnegan, "KoH_id");
-            }
-            if (entityUUID == null && leftDojutsuStack.hasTagCompound()) {
-                entityUUID = ProcedureUtils.getUniqueId(leftDojutsuStack, "KoH_id");
-            }
+            if (isPlayer && entityUUID == null) {
+                EntityPlayer player = (EntityPlayer) living;
 
-            if (entityUUID == null && rightTomoeRinnegan.hasTagCompound()) {
-                entityUUID = ProcedureUtils.getUniqueId(rightTomoeRinnegan, "KoH_id");
-            }
-            if (entityUUID == null && rightDojutsuStack.hasTagCompound()) {
-                entityUUID = ProcedureUtils.getUniqueId(rightDojutsuStack, "KoH_id");
+                ItemStack leftDojutsuStack = DojutsuSlotHelper.getLeftDojutsu(player);
+                ItemStack rightDojutsuStack = DojutsuSlotHelper.getRightDojutsu(player);
+
+                ItemStack leftTomoeRinnegan = DojutsuSlotHelper.getLeftTomoeRinnegan(player);
+                ItemStack rightTomoeRinnegan = DojutsuSlotHelper.getRightTomoeRinnegan(player);
+
+                if (leftTomoeRinnegan.hasTagCompound()) {
+                    entityUUID = ProcedureUtils.getUniqueId(leftTomoeRinnegan, "KoH_id");
+                }
+                if (entityUUID == null && leftDojutsuStack.hasTagCompound()) {
+                    entityUUID = ProcedureUtils.getUniqueId(leftDojutsuStack, "KoH_id");
+                }
+
+                if (entityUUID == null && rightTomoeRinnegan.hasTagCompound()) {
+                    entityUUID = ProcedureUtils.getUniqueId(rightTomoeRinnegan, "KoH_id");
+                }
+                if (entityUUID == null && rightDojutsuStack.hasTagCompound()) {
+                    entityUUID = ProcedureUtils.getUniqueId(rightDojutsuStack, "KoH_id");
+                }
             }
 
             if (entityUUID == null) {
-                if (Chakra.pathway(player).consume(ItemRinnegan.getNarakaPathChakraUsage(player))) {
-                    EntityKingOfHell.EntityCustom entityToSpawn = new EntityKingOfHell.EntityCustom(player);
+                double chakraburn = ItemRinnegan.getNarakaPathChakraUsage(living);
+                if (Chakra.pathway(living).consume(chakraburn)) {
+                    EntityKingOfHell.EntityCustom entityToSpawn = new EntityKingOfHell.EntityCustom(living, chakraburn);
                     world.spawnEntity(entityToSpawn);
 
-                    storeEntityUUIDToAllDojutsuSlots(player, entityToSpawn.getUniqueID(),
-                            helmetStack, leftDojutsuStack, rightDojutsuStack, leftTomoeRinnegan, rightTomoeRinnegan);
+                    if (isPlayer) {
+                        EntityPlayer player = (EntityPlayer) living;
+
+                        ItemStack leftDojutsuStack = DojutsuSlotHelper.getLeftDojutsu(player);
+                        ItemStack rightDojutsuStack = DojutsuSlotHelper.getRightDojutsu(player);
+                        ItemStack leftTomoeRinnegan = DojutsuSlotHelper.getLeftTomoeRinnegan(player);
+                        ItemStack rightTomoeRinnegan = DojutsuSlotHelper.getRightTomoeRinnegan(player);
+
+                        storeEntityUUIDToAllDojutsuSlots(helmetStack, leftDojutsuStack, rightDojutsuStack, leftTomoeRinnegan, rightTomoeRinnegan, entityToSpawn.getUniqueID());
+                    } else {
+                        storeEntityUUIDToAllDojutsuSlots(helmetStack, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, entityToSpawn.getUniqueID());
+                    }
                 }
             } else {
                 Entity entitySpawned = ((WorldServer) world).getEntityFromUuid(entityUUID);
@@ -114,27 +134,37 @@ public abstract class MixinProcedureNarakaPath extends ElementsNarutomodMod.ModE
                     ((EntityLivingBase) entitySpawned).setHealth(0.0F);
                 }
 
-                clearEntityUUIDFromAllDojutsuSlots(player, helmetStack, leftDojutsuStack, rightDojutsuStack, leftTomoeRinnegan, rightTomoeRinnegan);
+                if (isPlayer) {
+                    EntityPlayer player = (EntityPlayer) living;
+
+                    ItemStack leftDojutsuStack = DojutsuSlotHelper.getLeftDojutsu(player);
+                    ItemStack rightDojutsuStack = DojutsuSlotHelper.getRightDojutsu(player);
+                    ItemStack leftTomoeRinnegan = DojutsuSlotHelper.getLeftTomoeRinnegan(player);
+                    ItemStack rightTomoeRinnegan = DojutsuSlotHelper.getRightTomoeRinnegan(player);
+
+                    clearEntityUUIDFromAllDojutsuSlots(helmetStack, leftDojutsuStack, rightDojutsuStack, leftTomoeRinnegan, rightTomoeRinnegan);
+                } else {
+                    clearEntityUUIDFromAllDojutsuSlots(helmetStack, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY);
+                }
             }
         }
     }
 
     @Unique
-    private static boolean isRinneTenseiganHelmet(ItemStack stack) {
+    private static boolean isRinneganBase(ItemStack stack) {
         if (stack.isEmpty()) {
             return false;
         }
 
-        String className = stack.getItem().getClass().getName();
-        return className.contains("ItemRinnegan") || className.contains("ItemTenseigan");
+        return (stack.getItem() instanceof net.narutomod.item.ItemRinnegan.Base);
     }
 
     @Unique
-    private static void storeEntityUUIDToAllDojutsuSlots(EntityPlayer player, UUID entityUUID,
-                                                         ItemStack helmetStack, ItemStack leftDojutsuStack, ItemStack rightDojutsuStack,
-                                                         ItemStack leftRinneganTomoe, ItemStack rightRinneganTomoe) {
+    private static void storeEntityUUIDToAllDojutsuSlots(ItemStack helmetStack, ItemStack leftDojutsuStack,
+                                                         ItemStack rightDojutsuStack, ItemStack leftTomoeRinnegan,
+                                                         ItemStack rightTomoeRinnegan, UUID entityUUID) {
         // store in the helmet slot
-        if (isRinneTenseiganHelmet(helmetStack)) {
+        if (isRinneganBase(helmetStack)) {
             if (!helmetStack.hasTagCompound()) {
                 helmetStack.setTagCompound(new net.minecraft.nbt.NBTTagCompound());
                 helmetStack.getTagCompound().setUniqueId("KoH_id", entityUUID);
@@ -142,13 +172,13 @@ public abstract class MixinProcedureNarakaPath extends ElementsNarutomodMod.ModE
         }
 
         // store in the left dojutsu slots
-        if (isRinneTenseiganHelmet(leftRinneganTomoe)) {
-            if (!leftRinneganTomoe.hasTagCompound()) {
-                leftRinneganTomoe.setTagCompound(new net.minecraft.nbt.NBTTagCompound());
-                leftRinneganTomoe.getTagCompound().setUniqueId("KoH_id", entityUUID);
+        if (isRinneganBase(leftTomoeRinnegan)) {
+            if (!leftTomoeRinnegan.hasTagCompound()) {
+                leftTomoeRinnegan.setTagCompound(new net.minecraft.nbt.NBTTagCompound());
+                leftTomoeRinnegan.getTagCompound().setUniqueId("KoH_id", entityUUID);
             }
         }
-        if (isRinneTenseiganHelmet(leftDojutsuStack)) {
+        if (isRinneganBase(leftDojutsuStack)) {
             if (!leftDojutsuStack.hasTagCompound()) {
                 leftDojutsuStack.setTagCompound(new net.minecraft.nbt.NBTTagCompound());
                 leftDojutsuStack.getTagCompound().setUniqueId("KoH_id", entityUUID);
@@ -156,13 +186,13 @@ public abstract class MixinProcedureNarakaPath extends ElementsNarutomodMod.ModE
         }
 
         // store in the right dojutsu slots
-        if (isRinneTenseiganHelmet(rightRinneganTomoe)) {
-            if (!rightRinneganTomoe.hasTagCompound()) {
-                rightRinneganTomoe.setTagCompound(new net.minecraft.nbt.NBTTagCompound());
-                rightRinneganTomoe.getTagCompound().setUniqueId("KoH_id", entityUUID);
+        if (isRinneganBase(rightTomoeRinnegan)) {
+            if (!rightTomoeRinnegan.hasTagCompound()) {
+                rightTomoeRinnegan.setTagCompound(new net.minecraft.nbt.NBTTagCompound());
+                rightTomoeRinnegan.getTagCompound().setUniqueId("KoH_id", entityUUID);
             }
         }
-        if (isRinneTenseiganHelmet(rightDojutsuStack)) {
+        if (isRinneganBase(rightDojutsuStack)) {
             if (!rightDojutsuStack.hasTagCompound()) {
                 rightDojutsuStack.setTagCompound(new net.minecraft.nbt.NBTTagCompound());
                 rightDojutsuStack.getTagCompound().setUniqueId("KoH_id", entityUUID);
@@ -171,25 +201,25 @@ public abstract class MixinProcedureNarakaPath extends ElementsNarutomodMod.ModE
     }
 
     @Unique
-    private static void clearEntityUUIDFromAllDojutsuSlots(EntityPlayer player,
-                                                           ItemStack helmetStack, ItemStack leftDojutsuStack, ItemStack rightDojutsuStack,
-                                                           ItemStack leftRinneganTomoe, ItemStack rightRinneganTomoe) {
+    private static void clearEntityUUIDFromAllDojutsuSlots(ItemStack helmetStack,
+                                                           ItemStack leftDojutsuStack, ItemStack rightDojutsuStack,
+                                                           ItemStack leftTomoeRinnegan, ItemStack rightTomoeRinnegan) {
         // helmet
         if (helmetStack.hasTagCompound()) {
             ProcedureUtils.removeUniqueIdTag(helmetStack, "KoH_id");
         }
 
         // left dojutsu
-        if (leftRinneganTomoe.hasTagCompound()) {
-            ProcedureUtils.removeUniqueIdTag(leftRinneganTomoe, "KoH_id");
+        if (leftTomoeRinnegan.hasTagCompound()) {
+            ProcedureUtils.removeUniqueIdTag(leftTomoeRinnegan, "KoH_id");
         }
         if (leftDojutsuStack.hasTagCompound()) {
             ProcedureUtils.removeUniqueIdTag(leftDojutsuStack, "KoH_id");
         }
 
         // right dojutsu
-        if (rightRinneganTomoe.hasTagCompound()) {
-            ProcedureUtils.removeUniqueIdTag(rightRinneganTomoe, "KoH_id");
+        if (rightTomoeRinnegan.hasTagCompound()) {
+            ProcedureUtils.removeUniqueIdTag(rightTomoeRinnegan, "KoH_id");
         }
         if (rightDojutsuStack.hasTagCompound()) {
             ProcedureUtils.removeUniqueIdTag(rightDojutsuStack, "KoH_id");

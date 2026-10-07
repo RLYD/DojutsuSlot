@@ -12,7 +12,9 @@ public class MixinPlugin implements IMixinConfigPlugin {
     private static final String MIXIN_SUSANO = "com.fuskirby.dojutsu_slot.mixin.sharingan.MixinProcedureSusanooSkeletonBodyTickEvent";
     private static final String MIXIN_SHRINK = "com.fuskirby.dojutsu_slot.mixin.sharingan.MixinItemSharinganShrinkAmount";
     private static final String MIXIN_ETERNAL_SHRINK = "com.fuskirby.dojutsu_slot.mixin.sharingan.MixinItemMangekyoSharinganEternalShrinkAmount";
+
     private static final String ANBUBINGOBOOK = "anbubingobook";
+    private static final String ADDONRBNL = "addonrbnl";
     private static final String AHZNBCURSEMARKADDON = "ahznbcursemarkaddon";
 
     @Override
@@ -47,6 +49,81 @@ public class MixinPlugin implements IMixinConfigPlugin {
         }
         if (mixinClassName.equals("com.fuskirby.dojutsu_slot.mixin.anbubingobook.MixinProcedureevolve")) {
             return Loader.isModLoaded(ANBUBINGOBOOK);
+        }
+
+
+        // addonrbnl
+        if (mixinClassName.equals("com.fuskirby.dojutsu_slot.mixin.addonrbnl.MixinDojutsuAbilities")) {
+            return Loader.isModLoaded(ADDONRBNL);
+        }
+        if (mixinClassName.equals("com.fuskirby.dojutsu_slot.mixin.addonrbnl.item.MixinItemMangekyoSharinganAzazael")) {
+            return Loader.isModLoaded(ADDONRBNL);
+        }
+        if (mixinClassName.equals("com.fuskirby.dojutsu_slot.mixin.addonrbnl.item.MixinItemMangekyoSharinganIndra")) {
+            return Loader.isModLoaded(ADDONRBNL);
+        }
+        if (mixinClassName.equals("com.fuskirby.dojutsu_slot.mixin.addonrbnl.item.MixinItemMangekyoSharinganItachi")) {
+            return Loader.isModLoaded(ADDONRBNL);
+        }
+        if (mixinClassName.equals("com.fuskirby.dojutsu_slot.mixin.addonrbnl.item.MixinItemMangekyosharinganjikan")) {
+            return Loader.isModLoaded(ADDONRBNL);
+        }
+        if (mixinClassName.equals("com.fuskirby.dojutsu_slot.mixin.addonrbnl.item.MixinItemMangekyoSharinganNaori")) {
+            return Loader.isModLoaded(ADDONRBNL);
+        }
+        if (mixinClassName.equals("com.fuskirby.dojutsu_slot.mixin.addonrbnl.item.MixinItemMangekyoSharinganSarada")) {
+            return Loader.isModLoaded(ADDONRBNL);
+        }
+        if (mixinClassName.equals("com.fuskirby.dojutsu_slot.mixin.addonrbnl.item.MixinItemMangekyoSharinganShin")) {
+            return Loader.isModLoaded(ADDONRBNL);
+        }
+        if (mixinClassName.equals("com.fuskirby.dojutsu_slot.mixin.addonrbnl.item.MixinItemMangekyoSharinganShisui")) {
+            return Loader.isModLoaded(ADDONRBNL);
+        }
+        if (mixinClassName.equals("com.fuskirby.dojutsu_slot.mixin.addonrbnl.item.MixinItemSharinganLeft")) {
+            return Loader.isModLoaded(ADDONRBNL);
+        }
+        if (mixinClassName.equals("com.fuskirby.dojutsu_slot.mixin.addonrbnl.item.MixinItemSharinganLeftPlayerHook")) {
+            return Loader.isModLoaded(ADDONRBNL);
+        }
+        if (mixinClassName.equals("com.fuskirby.dojutsu_slot.mixin.addonrbnl.item.MixinItemSharinganRight")) {
+            return Loader.isModLoaded(ADDONRBNL);
+        }
+        if (mixinClassName.equals("com.fuskirby.dojutsu_slot.mixin.addonrbnl.item.MixinItemSharinganRightPlayerHook")) {
+            return Loader.isModLoaded(ADDONRBNL);
+        }
+        if (mixinClassName.equals("com.fuskirby.dojutsu_slot.mixin.addonrbnl.item.MixinItemDojutsu")) {
+            return Loader.isModLoaded(ADDONRBNL);
+        }
+        if (mixinClassName.equals("com.fuskirby.dojutsu_slot.mixin.addonrbnl.item.MixinItemGoldenByakugan")) {
+            return Loader.isModLoaded(ADDONRBNL);
+        }
+        if (mixinClassName.equals("com.fuskirby.dojutsu_slot.mixin.addonrbnl.item.MixinItemRinneganRaba")) {
+            return Loader.isModLoaded(ADDONRBNL);
+        }
+        if (mixinClassName.equals("com.fuskirby.dojutsu_slot.mixin.addonrbnl.item.MixinItemRinneganRabaBase")) {
+            return Loader.isModLoaded(ADDONRBNL);
+        }
+        if (mixinClassName.equals("com.fuskirby.dojutsu_slot.mixin.addonrbnl.item.MixinItemScarletEyes")) {
+            return Loader.isModLoaded(ADDONRBNL);
+        }
+        if (mixinClassName.equals("com.fuskirby.dojutsu_slot.mixin.addonrbnl.item.MixinItemScarletEyesBase")) {
+            return Loader.isModLoaded(ADDONRBNL);
+        }
+        if (mixinClassName.equals("com.fuskirby.dojutsu_slot.mixin.addonrbnl.MixinMedicalScrollGUIOnButtonClicked")) {
+            return Loader.isModLoaded(ADDONRBNL);
+        }
+        if (mixinClassName.equals("com.fuskirby.dojutsu_slot.mixin.MixinMedicalScrollGUIOnButtonClicked")) {
+            return !(Loader.isModLoaded(ADDONRBNL));
+        }
+        if (mixinClassName.equals("com.fuskirby.dojutsu_slot.mixin.addonrbnl.MixinItemMangekyoSharinganEternalShrinkAmount")) {
+            if (Loader.isModLoaded("dojutsu_addon")) {
+                return false;
+            }
+            return (Loader.isModLoaded(ADDONRBNL));
+        }
+        if (mixinClassName.equals("com.fuskirby.dojutsu_slot.mixin.addonrbnl.MixinProcedureTsukoyomi")) {
+            return (Loader.isModLoaded(ADDONRBNL));
         }
 
         // ahznbcursemarkaddon

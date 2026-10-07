@@ -1,6 +1,7 @@
 package com.fuskirby.dojutsu_slot.mixin;
 
 import com.fuskirby.dojutsu_slot.util.DojutsuSlotHelper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
