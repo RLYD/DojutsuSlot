@@ -3,8 +3,6 @@
   "compatibilityLevel": "JAVA_8",
   "package": "com.fuskirby.dojutsu_slot.mixin",
   "minVersion": "0.8",
-  "setSourceFile": true,
-  "priority": 0,
   "plugin": "com.fuskirby.dojutsu_slot.MixinPlugin",
   "refmap": "mixins.dojutsu_slot.refmap.json",
   "mixins": [
@@ -48,6 +46,7 @@
     "MixinProcedureOnPlayerPostTick",
     "MixinMedicalScrollGUIOnButtonClicked",
     "MixinProcedureWhiteZetsuFleshFoodEaten",
+    "MixinDojutsuAbilitiesLegacy",
 
     "anbubingobook.MixinProcedureevolve",
     "anbubingobook.MixinTrackerPlayerHook",
@@ -96,8 +95,5 @@
   ],
   "server": [
     "addonrbnl.procedure.MixinProcedureTsukoyomi"
-  ],
-  "injectors": {
-    "defaultRequire": 1
-  }
+  ]
 }

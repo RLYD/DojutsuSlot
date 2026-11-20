@@ -1,5 +1,6 @@
 package com.fuskirby.dojutsu_slot.mixin.anbubingobook;
 
+import com.fuskirby.dojutsu_slot.compat.AddonRbnlCompat;
 import com.fuskirby.dojutsu_slot.util.DojutsuAddonHelper;
 import com.fuskirby.dojutsu_slot.util.DojutsuSlotHelper;
 import net.mcreator.anbubingobook.procedure.procedureevolve;
@@ -44,7 +45,7 @@ public class MixinProcedureevolve {
         if (dojutsu == null || dojutsu.getTagCompound().hasKey("awakened")) return;
 
         if (Loader.isModLoaded("addonrbnl")) {
-            Item randomItem = net.addonraba.util.KekkeiGenkai.MANGEKYO.getItem();
+            Item randomItem = AddonRbnlCompat.getMangekyoItem().getItem();
             mangekyo = new ItemStack(randomItem, 1);
         }
         mangekyo = createMangekyoFromNbt(dojutsu, mangekyo);

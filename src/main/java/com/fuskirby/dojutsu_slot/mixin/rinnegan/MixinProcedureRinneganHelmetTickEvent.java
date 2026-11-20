@@ -64,8 +64,7 @@ public class MixinProcedureRinneganHelmetTickEvent {
             at = @At(value = "INVOKE",
                     target = "Lnet/minecraft/nbt/NBTTagCompound;func_74757_a(Ljava/lang/String;Z)V",
                     ordinal = 0,
-                    shift = At.Shift.AFTER),
-            remap = false)
+                    shift = At.Shift.AFTER))
     private static void afterSetRinnesharinganActivated(Map<String, Object> dependencies, CallbackInfo ci) {
         Entity entity = (Entity) dependencies.get("entity");
         if (!(entity instanceof EntityPlayer)) return;

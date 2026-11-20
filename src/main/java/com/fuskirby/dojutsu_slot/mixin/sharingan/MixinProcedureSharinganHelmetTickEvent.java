@@ -1,5 +1,6 @@
 package com.fuskirby.dojutsu_slot.mixin.sharingan;
 
+import com.fuskirby.dojutsu_slot.compat.AddonRbnlCompat;
 import com.fuskirby.dojutsu_slot.util.DojutsuAddonHelper;
 import com.fuskirby.dojutsu_slot.util.DojutsuSlotHelper;
 import net.minecraft.entity.Entity;
@@ -59,11 +60,8 @@ public class MixinProcedureSharinganHelmetTickEvent {
             Entity entity = (Entity) currentDependencies.get().get("entity");
             if (!(entity instanceof EntityPlayer)) return;
 
-            Item randomItem = getMangekyoItemIfPresent();
-
-            if (randomItem != null) {
-                stack = new ItemStack(randomItem, 1);
-            }
+            Item randomItem = AddonRbnlCompat.getMangekyoItem().getItem();
+            stack = new ItemStack(randomItem, 1);
         }
         stack = createMangekyoFromNbt(itemStack, stack);
 
@@ -99,17 +97,6 @@ public class MixinProcedureSharinganHelmetTickEvent {
             DojutsuSlotHelper.getLeftDojutsu(player).shrink(1);
         } else if ("right".equals(side)) {
             DojutsuSlotHelper.getRightDojutsu(player).shrink(1);
-        }
-    }
-
-    @Unique
-    private static Item getMangekyoItemIfPresent() {
-        try {
-            Class<?> clazz = Class.forName("net.addonraba.util.KekkeiGenkai");
-            Object mangekyo = clazz.getField("MANGEKYO").get(null);
-            return (Item) mangekyo.getClass().getMethod("getItem").invoke(mangekyo);
-        } catch (Exception e) {
-            return null;
         }
     }
 

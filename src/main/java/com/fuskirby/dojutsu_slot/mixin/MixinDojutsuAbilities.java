@@ -18,9 +18,7 @@ import java.util.Map;
 
 @Mixin(
     value = {
-        ProcedureEightTrigrams64Palms.class,
         ProcedureHakkeKusho.class,
-        ProcedureHakkeshoKaiten.class,
 
         ProcedureAmaterasu.class,
         ProcedureKamuiJikukanIdo.class,
